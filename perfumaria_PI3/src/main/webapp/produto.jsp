@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
+        <link rel="stylesheet" type="text/css" href="menu.css"/>
         <title>Inserir Produto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -24,10 +25,14 @@
         crossorigin="anonymous"></script>
     </head>
     <body>
+        <nav>
+            <ul class="menu"></ul>
+        </nav>
+        
         <main class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1>-------Informações do Produto-------</h1>
+                    <h1 style="color: white">-------Informações do Produto-------</h1>
                     <br>
                     <div>
                         <form method="post" action="${pageContext.request.contextPath}/produto/inclusao">
@@ -50,10 +55,10 @@
                                     <input type="checkbox" value="${cat.id}" name="cat" id="cat${cat.nome}" /> <label for="catA"><c:out value="${cat.nome}" /></label>
                                 </c:forEach>-->
                                 <div class="col-sm-12">
-                                <input type="radio" value="1" name="cat" id="unissex" /> <label for="catA">Unissex</label>
-                                <input type="radio" value="2" name="cat" id="masculina" /> <label for="catB">Masculina</label>
-                                <input type="radio" value="3" name="cat" id="feminina" /> <label for="catC">Feminina</label>
-                                <input type="radio" value="4" name="cat" id="infantil" /> <label for="catC">Infantil</label>
+                                <input type="radio" value="1" name="cat" id="unissex" /> <label for="unissex">Unissex</label>
+                                <input type="radio" value="2" name="cat" id="masculina" /> <label for="masculina">Masculina</label>
+                                <input type="radio" value="3" name="cat" id="feminina" /> <label for="feminina">Feminina</label>
+                                <input type="radio" value="4" name="cat" id="infantil" /> <label for="infantil">Infantil</label>
                                 </div>
                             </fieldset>
                             </div>
@@ -81,14 +86,17 @@
                                     <textarea style="width: 50%;" name="descricao"></textarea>
                                 </div>
                             </div>
-
+                            
                             <button type="submit">Salvar</button>
-                            <button type="reset">Resetar</button>
+                            <button type="reset">Limpar</button>
+                            <button type="reset" onClick="history.go(-1)">Voltar</button>
+                                
                         </form>
 
                     </div>
                 </div>
             </div>
         </main>
+        
     </body>
 </html>

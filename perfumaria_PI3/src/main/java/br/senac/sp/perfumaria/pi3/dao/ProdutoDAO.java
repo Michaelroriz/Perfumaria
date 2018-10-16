@@ -28,7 +28,7 @@ public class ProdutoDAO {
         Class.forName("com.mysql.jdbc.Driver");
         // Passo 2: Obter a conexão
         conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost:3306/produtobd",
+                "jdbc:mysql://localhost:3306/perfumaria",
                 "root",
                 "");
         
@@ -40,8 +40,8 @@ public class ProdutoDAO {
             throws SQLException, Exception {
         //Monta a string de inserção de um produto no BD,
         //utilizando os dados do produto passados como parâmetro
-        String sql = "INSERT INTO PRODUTO (DT_CADASTRO, NOME, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE) "
-                + "VALUES (NOW(), ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO PRODUTO (NOME, MARCA, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DT_CADASTRO) "
+                + "VALUES (?, ?, ?, ?, ?, ?, NOW())";
         
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -54,12 +54,13 @@ public class ProdutoDAO {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
-            //preparedStatement.setDate(1, produto.getDatahora());
+            
             preparedStatement.setString (1, produto.getNome());
-            preparedStatement.setString(2, produto.getDescricao());
-            preparedStatement.setDouble(3, produto.getPrecoCompra());
-            preparedStatement.setDouble(4, produto.getPrecoVenda());
-            preparedStatement.setInt(5, produto.getQuantidade());
+            preparedStatement.setString (2, produto.getMarca());
+            preparedStatement.setString(3, produto.getDescricao());
+            preparedStatement.setDouble(4, produto.getPrecoCompra());
+            preparedStatement.setDouble(5, produto.getPrecoVenda());
+            preparedStatement.setInt(6, produto.getQuantidade());
             //Executa o comando no banco de dados
             preparedStatement.execute();
         } finally {
@@ -149,7 +150,7 @@ public class ProdutoDAO {
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o produto
         //com o ID informado e que esteja ativo ("habilitado" com "true")
-        String sql = "SELECT * FROM Produto WHERE (id=?)";
+        String sql = "SELECT * FROM produto WHERE (id=?)";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -174,7 +175,7 @@ public class ProdutoDAO {
                 //Cria uma instância de Produto e popula com os valores do BD
                                 
                 Produto produto = new Produto();
-                produto.setId(result.getLong("id"));
+                produto.setId(result.getLong("ID"));
                 produto.setNome(result.getString("DT_CADASTRO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));

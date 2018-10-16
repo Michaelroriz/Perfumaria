@@ -14,29 +14,29 @@ public class Produto {
     
     private String nome;
     
+    private String marca;
+    
     private String descricao;
     
     private Double precoCompra;
     
     private Double precoVenda;
     
-    private int quantidade;
-    
-    private int disponivel;
+    private int quantidade;       
     
     private String[] categorias;
 
     public Produto() {
     }
 
-    public Produto(String nome, String descricao, Double precoCompra, Double precoVenda, int quantidade, int disponivel, String[] categorias) {
+    public Produto(String nome, String marca, String[] categorias,int quantidade, Double precoCompra, Double precoVenda, String descricao) {
         this.nome = nome;
-        this.descricao = descricao;
+        this.marca = marca;
+        this.categorias = categorias;
+        this.quantidade = quantidade;
         this.precoCompra = precoCompra;
         this.precoVenda = precoVenda;
-        this.quantidade = quantidade;
-        this.disponivel = disponivel;
-        this.categorias = categorias;
+        this.descricao = descricao;
     }
     
     public Long getId() {
@@ -87,12 +87,12 @@ public class Produto {
         this.quantidade = quantidade;
     }
 
-    public int getDisponivel() {
-        return disponivel;
+    public String getMarca() {
+        return marca;
     }
 
-    public void setDisponivel(int disponivel) {
-        this.disponivel = disponivel;
+    public void setMarca(String marca) {
+        this.marca = marca;
     }
 
     public String[] getCategorias() {
@@ -101,10 +101,5 @@ public class Produto {
 
     public void setCategorias(String[] categorias) {
         this.categorias = categorias;
-    }
-
-    public int getPreco() {
-        return precoVenda.intValue();
-    }
-
+    }    
 }

@@ -52,19 +52,18 @@ public class ProdutoServlet extends HttpServlet {
             throws ServletException, IOException {
 
         String nome = request.getParameter("nome");
-        String descricao = request.getParameter("descricao");
+        String marca = request.getParameter("marca");
+        String[] categorias = request.getParameterValues("cat");        
+        String qtdStr = request.getParameter("qtd");
         String precoCompraStr = request.getParameter("prcompra");
         String precoVendaStr = request.getParameter("prvenda");
-        String qtdStr = request.getParameter("qtd");
-        String dispStr = request.getParameter("disp");
-        String[] categorias = request.getParameterValues("cat");
-
+        String descricao = request.getParameter("descricao");
+      
         Double precoCompra = new Double(precoCompraStr);
         Double precoVenda = new Double(precoVendaStr);
-        int qtd = Integer.parseInt(qtdStr);
-        int disp = Integer.parseInt(dispStr);
+        int qtd = Integer.parseInt(qtdStr);        
 
-        Produto p = new Produto(nome, descricao, precoCompra, precoVenda, qtd, disp, categorias);
+        Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
         
         try {
            ProdutoDAO.inserir(p);
