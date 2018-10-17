@@ -4,7 +4,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="menu.css"/>
+        <link rel="stylesheet" type="text/css" href="formatacao.css"/>
         <title>Inserir Produto</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -23,6 +23,9 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+        
+
+
     </head>
     <body>
         <nav>
@@ -45,7 +48,7 @@
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="marca">Marca</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="marca" id="nome" />
+                                    <input type="text" name="marca" id="marca" />
                                 </div>
                             </div>
                             <div class="form-group row">

@@ -1,7 +1,3 @@
-/* 
-    Created on : 29/10/2016, 18:15:26
-    Author     : willian.carvalho
-*/
 
 *{
     margin: 0; 
@@ -17,6 +13,24 @@ body{
 .imagem{
     
 }
+
+.centralizarLogin{
+    background-color: #e1e1e1; 
+                width: 250px; 
+                height: 250px; 
+                left: 40%; 
+                padding:10px;
+                position:absolute;
+    
+}
+.posisaoBotao{
+    height:50px;
+    width:120px;
+    margin:auto;
+    text-align:center;
+    
+}
+
 
 nav{
     position: fixed;
@@ -94,5 +108,3 @@ nav{
     background-color: #fff;
     
 }
-
-

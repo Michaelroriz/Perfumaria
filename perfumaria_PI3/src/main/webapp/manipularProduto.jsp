@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="menu.css"/>
+        <link rel="stylesheet" type="text/css" href="formatacao.css"/>
         <title>Manipular Produto</title>
         <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -30,7 +30,7 @@
     <body>
         <nav>
             <ul class="menu">
-                <li><a href="#">Pesquisar produto</a></li> 
+                <li><a href="pesquisaproduto.jsp">Pesquisar produto</a></li> 
                 <li><a href="produto.jsp">Cadastrar novo produto</a></li>                        
                 <li><a href="#">Alterar produto</a></li>                        
                 <li><a href="#">Excluir produto</a></li>  

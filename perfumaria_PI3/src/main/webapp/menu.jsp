@@ -7,7 +7,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <link rel="stylesheet" type="text/css" href="menu.css"/>
+        <link rel="stylesheet" type="text/css" href="formatacao.css"/>
         <title>Menu Principal</title>
         <meta charset="UTF-8">
                 <meta name="viewport" content="width=device-width, initial-scale=1.0">
