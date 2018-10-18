@@ -59,7 +59,9 @@ public class ExcluirProduto extends HttpServlet {
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("/manipularProduto.jsp");
+        dispatcher.forward(request, response);
     }
     @Override
     public String getServletInfo() {

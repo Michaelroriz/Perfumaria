@@ -363,7 +363,7 @@ public class ProdutoDAO {
 //        }
 //    }
 
-    public void alterar(Produto produto) throws SQLException, Exception{
+    public static void alterar(Produto produto) throws SQLException, Exception{
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -391,11 +391,46 @@ public class ProdutoDAO {
             preparedStatement.setDouble(5, produto.getPrecoVenda());
             preparedStatement.setInt(6, produto.getQuantidade());
             preparedStatement.setLong(7, produto.getId());                      
-            preparedStatement.execute();
+            preparedStatement.executeUpdate();
             
-        } catch (SQLException ex) {
-            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
-        } 
+        } finally {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+
+        connection = null;
+        preparedStatement = null;
+        ResultSet result = null;
+        try {
+            String sqlid = "select max(id) as id from PRODUTO";
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sqlid);
+
+            result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                long id = result.getLong("id");
+                inserirCategoriaProduto(produto.getCategorias(), id);
+            }
+
+        } finally {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
     }   
     public void remove(long codigo) throws SQLException, Exception {
         //Conexão para abertura e fechamento

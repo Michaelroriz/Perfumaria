@@ -61,7 +61,7 @@ public class AlterarProduto extends HttpServlet {
         Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
         
         try {
-           ProdutoDAO.inserir(p);
+           ProdutoDAO.alterar(p);
         } catch (Exception e) {
 
         }

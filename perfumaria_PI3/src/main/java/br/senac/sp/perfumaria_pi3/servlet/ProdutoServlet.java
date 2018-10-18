@@ -75,7 +75,7 @@ public class ProdutoServlet extends HttpServlet {
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher(
-                        "/WEB-INF/Produto/resultado.jsp");
+                        "/manipularProduto.jsp");
         dispatcher.forward(request, response);
         
     }

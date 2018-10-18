@@ -49,7 +49,9 @@
                     <br>
                     <div>
                         <form method="post" action="${pageContext.request.contextPath}/AlterarProduto">
+                            <input type="hidden" name="id" value="<%=produto.getId()%>" size="6" /><br/>  
                             <div class="form-group row">
+                                
                                 <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                 <div class="col-sm-10">
                                     <input type="text" name="nome" id="nome" value="<%= produto.getNome()%>" />
