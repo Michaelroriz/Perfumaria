@@ -1,8 +1,4 @@
 
-*{
-    margin: 0; 
-    padding: 0;
-}
 
 body{
     font-family: arial, helvetica, sans-serif;
@@ -41,6 +37,11 @@ nav{
     padding: 50px;
     background: #000000;   
     border-bottom:3px solid #EA0000;
+}
+.table{
+    position: fixed;
+    padding: 10px;
+    margin:10px;
 }
 .container {
     position: absolute;

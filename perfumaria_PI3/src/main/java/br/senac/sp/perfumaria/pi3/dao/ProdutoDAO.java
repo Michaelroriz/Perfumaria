@@ -12,16 +12,27 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.senac.sp.perfumaria.pi3.model.Produto;
 import br.senac.sp.perfumaria.pi3.model.Categoria;
+import java.math.BigInteger;
+import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author rbezerra
  */
 public class ProdutoDAO {
-    
-    private static Connection obterConexao() throws ClassNotFoundException, SQLException{
+
+    Connection conexao;
+
+    public ProdutoDAO(Connection conexao) {
+        this.conexao = conexao;
+    }
+
+    public static Connection obterConexao() throws ClassNotFoundException, SQLException {
         //
         Connection conn = null;
         // Passo 1: Registar Driver JBDC
@@ -31,18 +42,62 @@ public class ProdutoDAO {
                 "jdbc:mysql://localhost:3306/perfumaria",
                 "root",
                 "");
-        
+
         return conn;
     }
-    
-     //Insere um produto na tabela "produto" do banco de dados
+
+    public List<Produto> listarProdutos() {
+        List<Produto> produtos = new ArrayList<Produto>();
+
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        try {
+            connection = obterConexao();
+            String sql = "SELECT * FROM PRODUTO";
+            java.sql.Statement stmt = connection.createStatement();
+            ResultSet rs = stmt.executeQuery(sql);
+
+            while (rs.next()) {
+                Produto produto = new Produto();
+
+                long codigo = rs.getInt("ID");
+                String nome = rs.getString("NOME");
+                String marca = rs.getString("MARCA");
+                String descricao = rs.getString("DESCRICAO");
+                double precoCompra = rs.getDouble("PRECO_COMPRA");
+                double precoVenda = rs.getDouble("PRECO_VENDA");
+                int qtd = rs.getInt("QUANTIDADE");
+                Date dataCad = rs.getDate("DT_CADASTRO");
+
+                produto.setId(codigo);
+                produto.setNome(nome);
+                produto.setMarca(marca);
+                produto.setDescricao(descricao);
+                produto.setPrecoCompra(precoCompra);
+                produto.setPrecoVenda(precoVenda);
+                produto.setQuantidade(qtd);
+                produto.setDataCadastro(dataCad);
+
+                produtos.add(produto);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return produtos;
+    }
+    //Insere um produto na tabela "produto" do banco de dados
+
     public static void inserir(Produto produto)
             throws SQLException, Exception {
         //Monta a string de inserção de um produto no BD,
         //utilizando os dados do produto passados como parâmetro
         String sql = "INSERT INTO PRODUTO (NOME, MARCA, DESCRICAO, PRECO_COMPRA, PRECO_VENDA, QUANTIDADE, DT_CADASTRO) "
                 + "VALUES (?, ?, ?, ?, ?, ?, NOW())";
-        
+
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
@@ -54,9 +109,9 @@ public class ProdutoDAO {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
-            
-            preparedStatement.setString (1, produto.getNome());
-            preparedStatement.setString (2, produto.getMarca());
+
+            preparedStatement.setString(1, produto.getNome());
+            preparedStatement.setString(2, produto.getMarca());
             preparedStatement.setString(3, produto.getDescricao());
             preparedStatement.setDouble(4, produto.getPrecoCompra());
             preparedStatement.setDouble(5, produto.getPrecoVenda());
@@ -73,26 +128,26 @@ public class ProdutoDAO {
                 connection.close();
             }
         }
-        
+
         connection = null;
         preparedStatement = null;
         ResultSet result = null;
-        try{
+        try {
             String sqlid = "select max(id) as id from PRODUTO";
-             //Abre uma conexão com o banco de dados
+            //Abre uma conexão com o banco de dados
             connection = obterConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sqlid);
-            
+
             result = preparedStatement.executeQuery();
-            
-            if(result.next()){
+
+            if (result.next()) {
                 long id = result.getLong("id");
                 inserirCategoriaProduto(produto.getCategorias(), id);
             }
-            
+
         } finally {
-              //Se o statement ainda estiver aberto, realiza seu fechamento
+            //Se o statement ainda estiver aberto, realiza seu fechamento
             if (preparedStatement != null && !preparedStatement.isClosed()) {
                 preparedStatement.close();
             }
@@ -102,48 +157,44 @@ public class ProdutoDAO {
             }
         }
     }
-    
-    
+
     private static void inserirCategoriaProduto(String[] categorias, long id)
             throws SQLException, Exception {
         String sql = "INSERT INTO PRODUTO_CATEGORIA (ID_PRODUTO, ID_CATEGORIA) "
                 + "VALUES (?, ?)";
-        
+
         //Conexão para abertura e fechamento
         Connection connection = null;
         //Statement para obtenção através da conexão, execução de
         //comandos SQL e fechamentos
         PreparedStatement preparedStatement = null;
-        
-      for( String numero : categorias )
-        {
-              try {
-                    //Abre uma conexão com o banco de dados
-                    connection = obterConexao();
-                    //Cria um statement para execução de instruções SQL
-                    preparedStatement = connection.prepareStatement(sql);
-                    //Configura os parâmetros do "PreparedStatement"
-                    //preparedStatement.setDate(1, produto.getDatahora());
-                    preparedStatement.setLong(1, id);
-                    preparedStatement.setInt (2, Integer.parseInt(numero));
-                    
 
-                    //Executa o comando no banco de dados
-                    preparedStatement.execute();
-                } finally {
-                    //Se o statement ainda estiver aberto, realiza seu fechamento
-                    if (preparedStatement != null && !preparedStatement.isClosed()) {
-                        preparedStatement.close();
-                    }
-                    //Se a conexão ainda estiver aberta, realiza seu fechamento
-                    if (connection != null && !connection.isClosed()) {
-                        connection.close();
-                    }
+        for (String numero : categorias) {
+            try {
+                //Abre uma conexão com o banco de dados
+                connection = obterConexao();
+                //Cria um statement para execução de instruções SQL
+                preparedStatement = connection.prepareStatement(sql);
+                //Configura os parâmetros do "PreparedStatement"
+                //preparedStatement.setDate(1, produto.getDatahora());
+                preparedStatement.setLong(1, id);
+                preparedStatement.setInt(2, Integer.parseInt(numero));
+
+                //Executa o comando no banco de dados
+                preparedStatement.execute();
+            } finally {
+                //Se o statement ainda estiver aberto, realiza seu fechamento
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
                 }
+                //Se a conexão ainda estiver aberta, realiza seu fechamento
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            }
         }
     }
-        
-    
+
     //Obtém uma instância da classe "Produto" através de dados do
     //banco de dados, de acordo com o ID fornecido como parâmetro
     public static Produto obter(Integer id)
@@ -173,7 +224,7 @@ public class ProdutoDAO {
             //Verifica se há pelo menos um resultado
             if (result.next()) {
                 //Cria uma instância de Produto e popula com os valores do BD
-                                
+
                 Produto produto = new Produto();
                 produto.setId(result.getLong("ID"));
                 produto.setNome(result.getString("DT_CADASTRO"));
@@ -182,7 +233,7 @@ public class ProdutoDAO {
                 produto.setQuantidade(result.getInt("QUANTIDADE"));
                 produto.setPrecoVenda(result.getDouble("PRECO_VENDA"));
                 produto.setPrecoCompra(result.getDouble("PRECO_COMPRA"));
-                
+
                 //Retorna o resultado
                 return produto;
             }
@@ -206,14 +257,12 @@ public class ProdutoDAO {
         //Neste caso, não há um elemento a retornar, então retornamos "null"
         return null;
     }
-    
-    
+
     //Obtém uma instância da classe "Produto" através de dados do
     //banco de dados, de acordo com o ID fornecido como parâmetro
     public static List<Categoria> obterCategoria()
             throws SQLException, Exception {
-        //Compõe uma String de consulta que considera apenas o produto
-        //com o ID informado e que esteja ativo ("habilitado" com "true")
+        //Compõe uma String de consulta que considera apenas o produto        
         String sql = "SELECT * FROM CATEGORIA";
 
         //Conexão para abertura e fechamento
@@ -232,18 +281,18 @@ public class ProdutoDAO {
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
             List<Categoria> categorias = new ArrayList<Categoria>();
-            
+
             //Verifica se há pelo menos um resultado
             while (result.next()) {
                 //Cria uma instância de Produto e popula com os valores do BD
-                
+
                 Categoria categoria = new Categoria();
                 categoria.setId(result.getInt("ID"));
                 categoria.setNome(result.getString("NOME"));
                 categorias.add(categoria);
                 //Retorna o resultado
             }
-            
+
             return categorias;
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
@@ -263,6 +312,102 @@ public class ProdutoDAO {
         //Se chegamos aqui, o "return" anterior não foi executado porque
         //a pesquisa não teve resultados
         //Neste caso, não há um elemento a retornar, então retornamos "null"
+    }
+
+//    public Produto remove(long codigo) throws SQLException, Exception {
+//
+//        String sql = "DELETE FROM PRODUTO WHERE ID=?";
+//        Connection connection = null;
+//        //Statement para obtenção através da conexão, execução de
+//        //comandos SQL e fechamentos
+//        PreparedStatement preparedStatement = null;
+//
+//        try {
+//            //Abre uma conexão com o banco de dados
+//            connection = obterConexao();
+//            //Cria um statement para execução de instruções SQL
+//            preparedStatement = connection.prepareStatement(sql);
+//
+//            preparedStatement.setLong(1, codigo);
+//
+//            preparedStatement.execute();
+//
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+//        }
+//        return null;
+//
+//    }
+//    public void remove(long codigo) throws SQLException, Exception {
+//        //Comando do banco
+//        long i = 1;
+//        String sql = "DELETE FROM PRODUTO WHERE ID =" + i;
+//
+//        //Conexão para abertura e fechamento
+//        Connection connection = null;
+//        //Statement para obtenção através da conexão, execução de
+//        //comandos SQL e fechamentos
+//        PreparedStatement preparedStatement = null;
+//        //Armazenará os resultados do banco de dados
+//        //ResultSet result = null;
+//        try {
+//            //Abre uma conexão com o banco de dados
+//            connection = obterConexao();
+//            //Cria um statement para execução de instruções SQL
+//            preparedStatement = connection.prepareStatement(sql);
+//            //result = preparedStatement.executeQuery();
+//            preparedStatement.executeUpdate();
+//            //JOptionPane.showMessageDialog(null,"Produto deletado com sucesso"); 
+//        } catch (SQLException ex) {
+//            JOptionPane.showMessageDialog(null, "Erro ao deletar produto" + ex);
+//        }
+//    }
+
+    public void alterar(Produto produto) throws SQLException, Exception{
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            String sql = "UPDATE produto "
+                + " SET nome = ?, marca = ?, descricao = ?, preco_compra = ?, preco_venda = ?,"
+                + " quantidade = ?"
+                + " WHERE id = ?";
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            //Configura os parâmetros do "PreparedStatement"
+            //Comando do banco            
+
+             
+            //Setando valores
+            
+            preparedStatement.setString(1, produto.getNome());
+            preparedStatement.setString(2, produto.getMarca());
+            preparedStatement.setString(3, produto.getDescricao());
+            preparedStatement.setDouble(4, produto.getPrecoCompra());
+            preparedStatement.setDouble(5, produto.getPrecoVenda());
+            preparedStatement.setInt(6, produto.getQuantidade());
+            preparedStatement.setLong(7, produto.getId());                      
+            preparedStatement.execute();
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(ProdutoDAO.class.getName()).log(Level.SEVERE, null, ex);
+        } 
+    }   
+    public void remove(long codigo) throws SQLException, Exception {
+        //Conexão para abertura e fechamento
        
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        Connection conn = obterConexao();
+        String sql = "DELETE FROM PRODUTO WHERE ID = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setLong(1, codigo);
+        stmt.execute();
+        stmt.close();
     }
 }

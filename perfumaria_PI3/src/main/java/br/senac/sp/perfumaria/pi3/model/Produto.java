@@ -5,6 +5,8 @@
  */
 package br.senac.sp.perfumaria.pi3.model;
 
+import java.sql.Date;
+
 /**
  *
  * @author rbezerra
@@ -25,6 +27,8 @@ public class Produto {
     private int quantidade;       
     
     private String[] categorias;
+    
+    private Date dataCadastro;
 
     public Produto() {
     }
@@ -101,5 +105,14 @@ public class Produto {
 
     public void setCategorias(String[] categorias) {
         this.categorias = categorias;
-    }    
+    } 
+
+    public Date getDataCadastro() {
+        return dataCadastro;
+    }
+
+    public void setDataCadastro(Date dataCadastro) {
+        this.dataCadastro = dataCadastro;
+    }
+    
 }
