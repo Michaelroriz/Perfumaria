@@ -12,13 +12,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import br.senac.sp.perfumaria.pi3.model.Produto;
 import br.senac.sp.perfumaria.pi3.model.Categoria;
-import java.math.BigInteger;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -201,7 +197,7 @@ public class ProdutoDAO {
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o produto
         //com o ID informado e que esteja ativo ("habilitado" com "true")
-        String sql = "SELECT * FROM produto WHERE (id=?)";
+        String sql = "SELECT * FROM produto WHERE id=?";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -227,6 +223,7 @@ public class ProdutoDAO {
 
                 Produto produto = new Produto();
                 produto.setId(result.getLong("ID"));
+                produto.setMarca(result.getString("MARCA"));
                 produto.setNome(result.getString("DT_CADASTRO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));
@@ -433,6 +430,20 @@ public class ProdutoDAO {
         }
     }   
     public void remove(long codigo) throws SQLException, Exception {
+        //Conexão para abertura e fechamento
+       
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        Connection conn = obterConexao();
+        String sql = "DELETE FROM PRODUTO_CATEGORIA WHERE ID_PRODUTO = ?";
+        PreparedStatement stmt = conn.prepareStatement(sql);
+        stmt.setLong(1, codigo);
+        stmt.execute();
+        stmt.close();
+        remove1(codigo);
+    }
+    public void remove1(long codigo) throws SQLException, Exception {
         //Conexão para abertura e fechamento
        
         //Statement para obtenção através da conexão, execução de

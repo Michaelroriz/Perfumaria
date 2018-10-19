@@ -66,7 +66,7 @@
                         <th>Descrição</th>
                         <th>Preço_Compra</th>
                         <th>Preço_Venda</th>
-                        <th>Qtd</th>
+                        <th>Qtd</th>                        
                         <th>Data_Cadastro</th>
                     </tr>
 
@@ -79,7 +79,7 @@
                         <td><%= p.getDescricao()%></td>
                         <td><%= p.getPrecoCompra()%></td>
                         <td><%= p.getPrecoVenda()%></td>
-                        <td><%= p.getQuantidade()%></td>                                                                      
+                        <td><%= p.getQuantidade()%></td>                         
                         <td><%= p.getDataCadastro()%></td>                                                                      
                         </td>
                         <td> <a href="ExcluirProduto?id=<%=p.getId()%>">Excluir</a></td>

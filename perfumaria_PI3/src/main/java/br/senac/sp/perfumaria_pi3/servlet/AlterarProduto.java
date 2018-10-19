@@ -59,7 +59,7 @@ public class AlterarProduto extends HttpServlet {
         Double precoVenda = new Double(precoVendaStr);
         int qtd = Integer.parseInt(qtdStr);        
         Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
-        
+        p.setId(id);
         try {
            ProdutoDAO.alterar(p);
         } catch (Exception e) {
