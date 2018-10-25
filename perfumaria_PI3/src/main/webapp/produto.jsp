@@ -38,7 +38,7 @@
                     <h1 style="color: white">-------Informações do Produto-------</h1>
                     <br>
                     <div>
-                        <form method="post" action="${pageContext.request.contextPath}/produto/inclusao">
+                        <form method="post" action="${pageContext.request.contextPath}/ProdutoServlet">
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                 <div class="col-sm-10">

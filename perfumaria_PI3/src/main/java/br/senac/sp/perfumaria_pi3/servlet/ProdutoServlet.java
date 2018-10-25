@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author rbezerra
  */
-@WebServlet(name = "InclusaoProdutoServlet", urlPatterns = {"/produto/inclusao"})
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
 public class ProdutoServlet extends HttpServlet {
     
     @Override
@@ -42,7 +42,7 @@ public class ProdutoServlet extends HttpServlet {
         request.setAttribute("categoria", categorias);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/WEB-INF/Produto/form.jsp");
+                = request.getRequestDispatcher("/produto.jsp");
         dispatcher.forward(request, response);
     }
     
