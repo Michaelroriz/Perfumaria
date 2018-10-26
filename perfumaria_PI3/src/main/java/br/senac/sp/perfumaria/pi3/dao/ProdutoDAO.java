@@ -415,7 +415,7 @@ public class ProdutoDAO {
 
             if (result.next()) {
                 long id = result.getLong("id");
-                inserirCategoriaProduto(produto.getCategorias(), id);
+                alterarCategoriaProduto(produto.getCategorias(), id);
             }
 
         } finally {
@@ -429,6 +429,42 @@ public class ProdutoDAO {
             }
         }
     }   
+    private static void alterarCategoriaProduto(String[] categorias, long id)
+            throws SQLException, Exception {
+        String sql = "UPDATE PRODUTO_CATEGORIA SET ID_PRODUTO=?, ID_CATEGORIA=? "
+                + "WHERE ID_PRODUTO=?";
+
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+
+        for (String numero : categorias) {
+            try {
+                //Abre uma conexão com o banco de dados
+                connection = obterConexao();
+                //Cria um statement para execução de instruções SQL
+                preparedStatement = connection.prepareStatement(sql);
+                //Configura os parâmetros do "PreparedStatement"
+                //preparedStatement.setDate(1, produto.getDatahora());
+                preparedStatement.setLong(1, id);
+                preparedStatement.setInt(2, Integer.parseInt(numero));
+                preparedStatement.setLong(3, id);
+                //Executa o comando no banco de dados
+                preparedStatement.execute();
+            } finally {
+                //Se o statement ainda estiver aberto, realiza seu fechamento
+                if (preparedStatement != null && !preparedStatement.isClosed()) {
+                    preparedStatement.close();
+                }
+                //Se a conexão ainda estiver aberta, realiza seu fechamento
+                if (connection != null && !connection.isClosed()) {
+                    connection.close();
+                }
+            }
+        }
+    }
     public void remove(long codigo) throws SQLException, Exception {
         //Conexão para abertura e fechamento
        

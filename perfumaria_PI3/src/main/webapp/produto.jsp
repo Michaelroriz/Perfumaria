@@ -54,14 +54,12 @@
                             <div class="form-group row">
                             <fieldset>
                                 <label class="col-sm-2 col-form-label" for="categoria">Categoria</label>
-                                <!--<c:forEach items="${categoria}" var="cat">
-                                    <input type="checkbox" value="${cat.id}" name="cat" id="cat${cat.nome}" /> <label for="catA"><c:out value="${cat.nome}" /></label>
-                                </c:forEach>-->
+                                
                                 <div class="col-sm-12">
-                                <input type="radio" value="1" name="cat" id="unissex" /> <label for="unissex">Unissex</label>
-                                <input type="radio" value="2" name="cat" id="masculina" /> <label for="masculina">Masculina</label>
-                                <input type="radio" value="3" name="cat" id="feminina" /> <label for="feminina">Feminina</label>
-                                <input type="radio" value="4" name="cat" id="infantil" /> <label for="infantil">Infantil</label>
+                                <input type="radio" value="1" name="cat" id="1" /> <label for="unissex">Unissex</label>
+                                <input type="radio" value="2" name="cat" id="2" /> <label for="masculina">Masculina</label>
+                                <input type="radio" value="3" name="cat" id="3" /> <label for="feminina">Feminina</label>
+                                <input type="radio" value="4" name="cat" id="4" /> <label for="infantil">Infantil</label>
                                 </div>
                             </fieldset>
                             </div>

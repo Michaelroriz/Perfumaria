@@ -18,6 +18,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -31,7 +32,7 @@ public class ExcluirProduto extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         //Variavel do id
-        
+
         String codigo = request.getParameter("id");
         long codbar = Long.parseLong(codigo);
         //Conexão para abertura e fechamento
@@ -41,6 +42,10 @@ public class ExcluirProduto extends HttpServlet {
             connection = obterConexao();
             ProdutoDAO dao = new ProdutoDAO(connection);
             dao.remove(codbar);
+            JOptionPane.showMessageDialog(null,
+                    "Produto excluído com sucesso",
+                    "Mensagem de aviso",
+                    JOptionPane.WARNING_MESSAGE);
         } catch (ClassNotFoundException e) {
             Logger.getLogger(ExcluirProduto.class.getName()).log(Level.SEVERE, null, e);
         } catch (SQLException e) {
@@ -55,14 +60,16 @@ public class ExcluirProduto extends HttpServlet {
 
     }
 
-     @Override
+    @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
+        
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher("/manipularProduto.jsp");
         dispatcher.forward(request, response);
     }
+
     @Override
     public String getServletInfo() {
         return "Short description";

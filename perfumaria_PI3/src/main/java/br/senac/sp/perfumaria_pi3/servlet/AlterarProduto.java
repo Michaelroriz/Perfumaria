@@ -20,6 +20,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -62,6 +63,10 @@ public class AlterarProduto extends HttpServlet {
         p.setId(id);
         try {
            ProdutoDAO.alterar(p);
+           JOptionPane.showMessageDialog(null,
+                    "Produto alterado com sucesso",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
 
         }

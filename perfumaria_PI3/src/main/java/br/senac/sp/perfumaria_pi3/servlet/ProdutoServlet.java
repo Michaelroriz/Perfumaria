@@ -17,6 +17,7 @@ import br.senac.sp.perfumaria.pi3.model.Categoria;
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -67,6 +68,10 @@ public class ProdutoServlet extends HttpServlet {
         
         try {
            ProdutoDAO.inserir(p);
+           JOptionPane.showMessageDialog(null,
+                    "Produto cadastrado com sucesso",
+                    "Aviso",
+                    JOptionPane.WARNING_MESSAGE);
         } catch (Exception e) {
 
         }
