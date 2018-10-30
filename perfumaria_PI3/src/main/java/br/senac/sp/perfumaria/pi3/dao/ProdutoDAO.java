@@ -221,16 +221,16 @@ public class ProdutoDAO {
             if (result.next()) {
                 //Cria uma instância de Produto e popula com os valores do BD
 
-                Produto produto = new Produto();
+                Produto produto = new Produto();                
                 produto.setId(result.getLong("ID"));
                 produto.setMarca(result.getString("MARCA"));
-                produto.setNome(result.getString("DT_CADASTRO"));
+                produto.setDataCadastro(result.getDate("DT_CADASTRO"));
                 produto.setNome(result.getString("NOME"));
                 produto.setDescricao(result.getString("DESCRICAO"));
                 produto.setQuantidade(result.getInt("QUANTIDADE"));
                 produto.setPrecoVenda(result.getDouble("PRECO_VENDA"));
                 produto.setPrecoCompra(result.getDouble("PRECO_COMPRA"));
-
+                
                 //Retorna o resultado
                 return produto;
             }
