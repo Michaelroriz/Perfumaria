@@ -75,7 +75,7 @@ public class ProdutoServlet extends HttpServlet {
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null,
                     "Erro ao cadastrar novo produto",
-                    "Aviso",
+                    "Erro",
                     JOptionPane.WARNING_MESSAGE);
         }
         
