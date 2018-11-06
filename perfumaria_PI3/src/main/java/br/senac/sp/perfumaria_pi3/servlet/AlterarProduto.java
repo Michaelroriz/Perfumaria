@@ -6,21 +6,20 @@
 package br.senac.sp.perfumaria_pi3.servlet;
 
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
-import static br.senac.sp.perfumaria.pi3.dao.ProdutoDAO.obterConexao;
+import br.senac.sp.perfumaria.pi3.model.Categoria;
 import br.senac.sp.perfumaria.pi3.model.Produto;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,11 +32,24 @@ public class AlterarProduto extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        //Variavel do id
-        String id = request.getParameter("id");
+        
+        long id = Long.parseLong(request.getParameter("id"));
+        List<Categoria> categorias = new ArrayList<Categoria>();
+        
+        Produto produto = null;
+        try {
+            produto = ProdutoDAO.obter(id);
+            categorias = ProdutoDAO.obterCategoria();
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
         request.setAttribute("id", id);
+        request.setAttribute("prod", produto);
+        request.setAttribute("categoria", categorias);
+
         //Request diretorio
-        request.getRequestDispatcher("/alterarProduto.jsp").forward(request, response); 
+        request.getRequestDispatcher("WEB-INF/Produto/alterarProduto.jsp")
+                .forward(request, response); 
         
         
     }
@@ -47,7 +59,7 @@ public class AlterarProduto extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        long id = Long.parseLong(request.getParameter("id"));
+        long id = Long.parseLong(request.getParameter("codProd"));
         String nome = request.getParameter("nome");
         String marca = request.getParameter("marca");
         String[] categorias = request.getParameterValues("cat");        
@@ -55,33 +67,30 @@ public class AlterarProduto extends HttpServlet {
         String precoCompraStr = request.getParameter("prcompra");
         String precoVendaStr = request.getParameter("prvenda");
         String descricao = request.getParameter("descricao");
-      
         Double precoCompra = new Double(precoCompraStr);
         Double precoVenda = new Double(precoVendaStr);
-        int qtd = Integer.parseInt(qtdStr);        
+        int qtd = Integer.parseInt(qtdStr);      
+        
+        List<Categoria> categorias2 = new ArrayList<Categoria>();
+        
         Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
         p.setId(id);
         try {
+           categorias2 = ProdutoDAO.obterCategoria();
            ProdutoDAO.alterar(p);
-           JOptionPane.showMessageDialog(null,
-                    "Produto alterado com sucesso",
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
+           ProdutoDAO.alterarCategoriaProduto(categorias, id);
         } catch (Exception e) {
 
         }
-        
+        request.setAttribute("id", id);
         request.setAttribute("prod", p);
+        request.setAttribute("categoria", categorias2);
         
 
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/manipularProduto.jsp");
+                = request.getRequestDispatcher("WEB-INF/Produto/alterarProduto.jsp");
         dispatcher.forward(request, response);
 
-    }
-    @Override
-    public String getServletInfo() {
-        return "Short description";
     }
 
 }

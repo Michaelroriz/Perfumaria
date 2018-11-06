@@ -5,8 +5,8 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>Inserir Produto</title>
-        <meta charset="UTF-8">
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -24,80 +24,75 @@
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
         
-
-
+        
     </head>
-    <body>
+    <body>          
         <nav>
             <ul class="menu"></ul>
         </nav>
-        
+
         <main class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 style="color: white">-------Informações do Produto-------</h1>
+                    <h1 style="color: white">-------Alterar Produto-------</h1>
                     <br>
                     <div>
-                        <form method="post" action="${pageContext.request.contextPath}/ProdutoServlet">
+                        <form method="post" action="${pageContext.request.contextPath}/AlterarProduto">
+                            <input type="hidden" value="${id}" name="codProd" id="codProd"/>
+                            
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="nome">Nome</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="nome" id="nome" />
+                                <div class="col-sm-10"> 
+                                    <input type="text" value="${prod.nome}" name="nome" id="nome" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="marca">Marca</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="marca" id="marca" />
+                                    <input type="text" value="${prod.marca}" name="marca" id="marca" />
                                 </div>
                             </div>
                             <div class="form-group row">
                             <fieldset>
-                                <label class="col-sm-2 col-form-label" for="categoria">Categoria</label>
-                                
-                                <div class="col-sm-12">
-                                <input type="radio" value="1" name="cat" id="1" /> <label for="unissex">Unissex</label>
-                                <input type="radio" value="2" name="cat" id="2" /> <label for="masculina">Masculina</label>
-                                <input type="radio" value="3" name="cat" id="3" /> <label for="feminina">Feminina</label>
-                                <input type="radio" value="4" name="cat" id="4" /> <label for="infantil">Infantil</label>
-                                </div>
+                                <label class="col-sm-2 col-form-label" for="categoria">Categorias</label>
+                                <ul>
+                                    <c:forEach items="${categoria}" var="cat">
+                                        <input type="radio" value="${cat.id}" id="${cat.id}" name="cat"/>${cat.nome}
+                                    </c:forEach>
+                                </ul>
                             </fieldset>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="qtd" />
+                                    <input type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="prcompra" />
+                                    <input type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
                                 <div class="col-sm-10">
-                                    <input type="text" name="prvenda" />
+                                    <input type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
                                 <div class="col-sm-10">
-                                    <textarea style="width: 50%;" name="descricao"></textarea>
+                                    <textarea style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
                                 </div>
                             </div>
-                            
                             <button type="submit">Salvar</button>
                             <button type="reset">Limpar</button>
                             <button type="reset" onClick="history.go(-1)">Voltar</button>
-                                
                         </form>
-
                     </div>
                 </div>
             </div>
         </main>
-        
     </body>
 </html>

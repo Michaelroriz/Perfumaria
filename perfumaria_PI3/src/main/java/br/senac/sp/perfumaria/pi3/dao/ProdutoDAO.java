@@ -193,7 +193,7 @@ public class ProdutoDAO {
 
     //Obtém uma instância da classe "Produto" através de dados do
     //banco de dados, de acordo com o ID fornecido como parâmetro
-    public static Produto obter(Integer id)
+    public static Produto obter(Long id)
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o produto
         //com o ID informado e que esteja ativo ("habilitado" com "true")
@@ -212,7 +212,7 @@ public class ProdutoDAO {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
 
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
@@ -223,13 +223,13 @@ public class ProdutoDAO {
 
                 Produto produto = new Produto();                
                 produto.setId(result.getLong("ID"));
-                produto.setMarca(result.getString("MARCA"));
-                produto.setDataCadastro(result.getDate("DT_CADASTRO"));
                 produto.setNome(result.getString("NOME"));
+                produto.setMarca(result.getString("MARCA"));
                 produto.setDescricao(result.getString("DESCRICAO"));
-                produto.setQuantidade(result.getInt("QUANTIDADE"));
-                produto.setPrecoVenda(result.getDouble("PRECO_VENDA"));
                 produto.setPrecoCompra(result.getDouble("PRECO_COMPRA"));
+                produto.setPrecoVenda(result.getDouble("PRECO_VENDA"));
+                produto.setQuantidade(result.getInt("QUANTIDADE"));
+                produto.setDataCadastro(result.getDate("DT_CADASTRO"));
                 
                 //Retorna o resultado
                 return produto;
@@ -311,55 +311,6 @@ public class ProdutoDAO {
         //Neste caso, não há um elemento a retornar, então retornamos "null"
     }
 
-//    public Produto remove(long codigo) throws SQLException, Exception {
-//
-//        String sql = "DELETE FROM PRODUTO WHERE ID=?";
-//        Connection connection = null;
-//        //Statement para obtenção através da conexão, execução de
-//        //comandos SQL e fechamentos
-//        PreparedStatement preparedStatement = null;
-//
-//        try {
-//            //Abre uma conexão com o banco de dados
-//            connection = obterConexao();
-//            //Cria um statement para execução de instruções SQL
-//            preparedStatement = connection.prepareStatement(sql);
-//
-//            preparedStatement.setLong(1, codigo);
-//
-//            preparedStatement.execute();
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//        return null;
-//
-//    }
-//    public void remove(long codigo) throws SQLException, Exception {
-//        //Comando do banco
-//        long i = 1;
-//        String sql = "DELETE FROM PRODUTO WHERE ID =" + i;
-//
-//        //Conexão para abertura e fechamento
-//        Connection connection = null;
-//        //Statement para obtenção através da conexão, execução de
-//        //comandos SQL e fechamentos
-//        PreparedStatement preparedStatement = null;
-//        //Armazenará os resultados do banco de dados
-//        //ResultSet result = null;
-//        try {
-//            //Abre uma conexão com o banco de dados
-//            connection = obterConexao();
-//            //Cria um statement para execução de instruções SQL
-//            preparedStatement = connection.prepareStatement(sql);
-//            //result = preparedStatement.executeQuery();
-//            preparedStatement.executeUpdate();
-//            //JOptionPane.showMessageDialog(null,"Produto deletado com sucesso"); 
-//        } catch (SQLException ex) {
-//            JOptionPane.showMessageDialog(null, "Erro ao deletar produto" + ex);
-//        }
-//    }
-
     public static void alterar(Produto produto) throws SQLException, Exception{
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -429,7 +380,7 @@ public class ProdutoDAO {
             }
         }
     }   
-    private static void alterarCategoriaProduto(String[] categorias, long id)
+    public static void alterarCategoriaProduto(String[] categorias, long id)
             throws SQLException, Exception {
         String sql = "UPDATE PRODUTO_CATEGORIA SET ID_PRODUTO=?, ID_CATEGORIA=? "
                 + "WHERE ID_PRODUTO=?";
@@ -465,31 +416,71 @@ public class ProdutoDAO {
             }
         }
     }
-    public void remove(long codigo) throws SQLException, Exception {
-        //Conexão para abertura e fechamento
-       
-        //Statement para obtenção através da conexão, execução de
-        //comandos SQL e fechamentos
-        PreparedStatement preparedStatement = null;
-        Connection conn = obterConexao();
+    public static void remove(long codigo) throws SQLException, Exception {
+        
         String sql = "DELETE FROM PRODUTO_CATEGORIA WHERE ID_PRODUTO = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setLong(1, codigo);
-        stmt.execute();
-        stmt.close();
-        remove1(codigo);
-    }
-    public void remove1(long codigo) throws SQLException, Exception {
-        //Conexão para abertura e fechamento
-       
-        //Statement para obtenção através da conexão, execução de
-        //comandos SQL e fechamentos
+        Connection connection = null;
         PreparedStatement preparedStatement = null;
-        Connection conn = obterConexao();
+        
+        try 
+        {
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, codigo);
+            preparedStatement.execute();
+        } 
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) 
+            {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) 
+            {
+                connection.close();
+            }
+            remove1(codigo);
+        }
+    }
+    public static  void remove1(long codigo) throws SQLException, Exception 
+    {
         String sql = "DELETE FROM PRODUTO WHERE ID = ?";
-        PreparedStatement stmt = conn.prepareStatement(sql);
-        stmt.setLong(1, codigo);
-        stmt.execute();
-        stmt.close();
+        PreparedStatement preparedStatement = null;
+        Connection connection = null;
+        
+        try 
+        {
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            preparedStatement.setLong(1, codigo);
+            preparedStatement.execute();
+        }
+        catch (SQLException e) 
+        {
+            e.printStackTrace();
+        }
+        finally 
+        {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) 
+            {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) 
+            {
+                connection.close();
+            }
+        }
     }
 }

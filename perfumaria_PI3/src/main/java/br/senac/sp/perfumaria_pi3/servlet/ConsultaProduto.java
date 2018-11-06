@@ -1,7 +1,10 @@
-package br.senac.sp.perfumaria_pi3.servlet;
+    package br.senac.sp.perfumaria_pi3.servlet;
 
+import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import br.senac.sp.perfumaria.pi3.model.Produto;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -21,26 +24,8 @@ import javax.servlet.http.HttpServletResponse;
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        long id = Long.parseLong(request.getParameter("id"));
-        String nome = request.getParameter("nome");
-        String marca = request.getParameter("marca");
-        String[] categorias = request.getParameterValues("categoria");        
-        String qtdStr = request.getParameter("qtd");
-        String precoCompraStr = request.getParameter("prcompra");
-        String precoVendaStr = request.getParameter("prvenda");
-        String descricao = request.getParameter("descricao");
-      
-        Double precoCompra = new Double(precoCompraStr);
-        Double precoVenda = new Double(precoVendaStr);
-        int qtd = Integer.parseInt(qtdStr);        
-        Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
-        p.setId(id);        
         
-        request.setAttribute("prod", p);
-        
-
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/manipularProduto.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Produto/pesquisaProduto.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -50,10 +35,18 @@ import javax.servlet.http.HttpServletResponse;
             throws ServletException, IOException {
         
         //Variavel do id
-        String id = request.getParameter("id");
-        request.setAttribute("id", id);
+        long id = Long.parseLong(request.getParameter("id"));
+        
+        Produto produto = null;
+        try {
+            produto = ProdutoDAO.obter(id);
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+        request.setAttribute("prod", produto);
+        
         //Request diretorio
-        request.getRequestDispatcher("/exibirProduto.jsp").forward(request, response); 
+        request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp").forward(request, response); 
 
     }
     

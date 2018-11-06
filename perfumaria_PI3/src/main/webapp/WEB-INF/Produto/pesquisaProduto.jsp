@@ -1,5 +1,5 @@
 <%-- 
-    Document   : consultaproduto
+    Document   : pesquisaProduto
     Created on : 17/10/2018, 11:55:56
     Author     : Bruno
 --%>
@@ -44,10 +44,11 @@
                             <label>ID&nbsp;&nbsp;<input style="width: 112%;" type="text" name="id" id="id"/></label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<button href="exibirProduto.jsp" type="submit">Procurar</button>
+                            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            <button href="./ConsultaProduto" type="submit">Procurar</button>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;                            
-                            <button type="reset" onClick="history.go(-1)">Voltar</button>
+                            <button type="button" href="menu.jsp">Voltar</button>
                         </form> 
                     </div>
                 </div>

@@ -1,12 +1,3 @@
-<%-- 
-    Document   : exibirProduto
-    Created on : 26/10/2018, 20:28:35
-    Author     : Michael
---%>
-
-<%@page import="br.senac.sp.perfumaria.pi3.model.Produto"%>
-<%@page import="java.sql.Connection"%>
-<%@page import="br.senac.sp.perfumaria.pi3.dao.ProdutoDAO"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
@@ -14,8 +5,8 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">        
+        <title>Inserir Produto</title>
+        <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
@@ -32,88 +23,79 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
+        
 
 
     </head>
     <body>
-
-        <%
-            Connection conexao = ProdutoDAO.obterConexao();
-
-            ProdutoDAO dao = new ProdutoDAO(conexao);
-
-            Produto produto = dao.obter(Integer.parseInt(request.getParameter("id")));
-        %>  
         <nav>
             <ul class="menu"></ul>
         </nav>
-
+        
         <main class="container">
             <div class="row">
                 <div class="col-12">
-                    <h1 style="color: white">-------Consulta Produto-------</h1>
+                    <h1 style="color: white">-------Informações do Produto-------</h1>
                     <br>
                     <div>
-                        <form method="post" action="${pageContext.request.contextPath}/ConsultaProduto">
-                            <input readonly="true" type="text" name="id" style="display: none" value="<%=produto.getId()%>" size="6" /><br/>  
+                        <form method="post" action="${pageContext.request.contextPath}/IncluirProduto">
                             <div class="form-group row">
-
                                 <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="nome" id="nome" value="<%= produto.getNome()%>" />
+                                    <input type="text" name="nome" id="nome" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="marca">Marca</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="marca" id="marca" value="<%= produto.getMarca()%>"/>
+                                    <input type="text" name="marca" id="marca" />
                                 </div>
                             </div>
-                            <div class="form-group row">                                
-                                <label class="col-sm-2 col-form-label" for="categoria">Categoria</label>
-                                <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="categoria" value="<%= produto.getCategorias()%>"/>                                        
-                                </div>                                
+                            <div class="form-group row">
+                            <fieldset>
+                                <label class="col-sm-2 col-form-label" for="categoria">Categorias</label>
+                                <ul>
+                                    <c:forEach items="${categoria}" var="cat">
+                                        <input type="radio" value="${cat.nome}" id="${cat.id}" name="sexo"/>${cat.nome}
+                                    </c:forEach>
+                                </ul>
+                            </fieldset>
                             </div>
-
-
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="qtd" value="<%= produto.getQuantidade()%>"/>
+                                    <input type="text" name="qtd" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="prcompra" value="<%= produto.getPrecoCompra()%>"/>
+                                    <input type="text" name="prcompra" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="prvenda" value="<%= produto.getPrecoVenda()%>"/>
+                                    <input type="text" name="prvenda" />
                                 </div>
                             </div>
                             <div class="form-group row">
                                 <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
                                 <div class="col-sm-10">
-                                    <input readonly="true" type="textarea" size="40" name="descricao" value="<%= produto.getDescricao()%>"/>
+                                    <textarea style="width: 50%;" name="descricao"></textarea>
                                 </div>
                             </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="dtCadastro">Data de Cadastro</label>
-                                <div class="col-sm-10">
-                                    <input readonly="true" type="text" name="dtCadastro" value="<%= produto.getDataCadastro()%>"/>
-                                </div>
-                            </div>  
                             
+                            <button type="submit">Salvar</button>
+                            <button type="reset">Limpar</button>
                             <button type="reset" onClick="history.go(-1)">Voltar</button>
+                                
                         </form>
+
                     </div>
                 </div>
             </div>
         </main>
-
+        
     </body>
 </html>

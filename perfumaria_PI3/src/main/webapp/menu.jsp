@@ -19,21 +19,15 @@
             <ul class="menu">
                 <li><a href="#">Cadastros</a>
                     <ul>
-                        <li><a href="cliente.jsp">Clientes</a></li>
-                        <li><a href="fornecedor.jsp">Fornecedores</a></li>                         
-                        <li><a href="manipularProduto.jsp">Produtos</a></li>                  
-                        <li><a href="almoxarifado.jsp">Almoxarifados</a></li> 
-                        <li><a href="filial.jsp">Filiais</a></li> 
+                        <li><a href="cliente.jsp">Clientes</a></li>                       
+                        <li><a href="./IncluirProduto">Produtos</a></li>                  
                         <li><a href="usuario.jsp">Usuários</a></li> 
                     </ul>
                 </li>
-                <li><a href="#">Atualizações</a>
+                <li><a href="#">Pesquisa</a>
                     <ul>
-                        <li><a href="#">Vendas</a></li>
-                        <li><a href="#">Compras</a></li>
-                        <li><a href="#">Recebimentos</a></li>                    
-                        <li><a href="#">Pagamentos</a></li>
-                        <li><a href="#">Transferencias</a></li>	                
+                        <li><a href="#">Clientes</a></li>
+                        <li><a href="./ConsultaProduto">Produtos</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Relatorios</a>

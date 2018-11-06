@@ -6,19 +6,15 @@
 package br.senac.sp.perfumaria_pi3.servlet;
 
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
-import static br.senac.sp.perfumaria.pi3.dao.ProdutoDAO.obterConexao;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -33,29 +29,8 @@ public class ExcluirProduto extends HttpServlet {
             throws ServletException, IOException {
         //Variavel do id
 
-        String codigo = request.getParameter("id");
-        long codbar = Long.parseLong(codigo);
-        //Conexão para abertura e fechamento
-        Connection connection = null;
-        try {
-            //Comando do banco
-            connection = obterConexao();
-            ProdutoDAO dao = new ProdutoDAO(connection);
-            dao.remove(codbar);
-            JOptionPane.showMessageDialog(null,
-                    "Produto excluído com sucesso",
-                    "Mensagem de aviso",
-                    JOptionPane.WARNING_MESSAGE);
-        } catch (ClassNotFoundException e) {
-            Logger.getLogger(ExcluirProduto.class.getName()).log(Level.SEVERE, null, e);
-        } catch (SQLException e) {
-            Logger.getLogger(ExcluirProduto.class.getName()).log(Level.SEVERE, null, e);
-        } catch (Exception ex) {
-            Logger.getLogger(ExcluirProduto.class.getName()).log(Level.SEVERE, null, ex);
-        }
-
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/manipularProduto.jsp");
+                = request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp");
         dispatcher.forward(request, response);
 
     }
@@ -65,14 +40,19 @@ public class ExcluirProduto extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/manipularProduto.jsp");
-        dispatcher.forward(request, response);
-    }
+        String codigo = request.getParameter("id");
+        long id = Long.parseLong(codigo);
+        //Conexão para abertura e fechamento
+        try 
+        {
+           ProdutoDAO.remove(id);
 
-    @Override
-    public String getServletInfo() {
-        return "Short description";
+        } catch (Exception e) {
+        }
+        
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp");
+        dispatcher.forward(request, response);
     }
 
 }

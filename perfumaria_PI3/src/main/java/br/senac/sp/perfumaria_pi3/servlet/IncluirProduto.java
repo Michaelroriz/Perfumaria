@@ -17,14 +17,13 @@ import br.senac.sp.perfumaria.pi3.model.Categoria;
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
  * @author rbezerra
  */
-@WebServlet(name = "ProdutoServlet", urlPatterns = {"/ProdutoServlet"})
-public class ProdutoServlet extends HttpServlet {
+@WebServlet(name = "ProdutoServlet", urlPatterns = {"/IncluirProduto"})
+public class IncluirProduto extends HttpServlet {
     
     @Override
     protected void doGet(HttpServletRequest request,
@@ -43,7 +42,7 @@ public class ProdutoServlet extends HttpServlet {
         request.setAttribute("categoria", categorias);
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("/produto.jsp");
+                = request.getRequestDispatcher("WEB-INF/Produto/cadastrarProduto.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -66,24 +65,22 @@ public class ProdutoServlet extends HttpServlet {
 
         Produto p = new Produto(nome, marca,categorias, qtd, precoCompra, precoVenda,descricao );
         
+        List<Categoria> categorias2 = new ArrayList<Categoria>();
+        
         try {
+           categorias2 = ProdutoDAO.obterCategoria();
            ProdutoDAO.inserir(p);
-           JOptionPane.showMessageDialog(null,
-                    "Produto cadastrado com sucesso",
-                    "Aviso",
-                    JOptionPane.WARNING_MESSAGE);
+
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,
-                    "Erro ao cadastrar novo produto",
-                    "Erro",
-                    JOptionPane.WARNING_MESSAGE);
         }
         
         request.setAttribute("prod", p);
+        request.setAttribute("categoria", categorias2);
+        
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher(
-                        "/manipularProduto.jsp");
+                        "WEB-INF/Produto/cadastrarProduto.jsp");
         dispatcher.forward(request, response);
         
     }
