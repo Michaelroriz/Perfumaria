@@ -81,7 +81,9 @@ public class ProdutoDAO {
             }
 
         } catch (Exception e) {
+            
             e.printStackTrace();
+        
         }
         return produtos;
     }
