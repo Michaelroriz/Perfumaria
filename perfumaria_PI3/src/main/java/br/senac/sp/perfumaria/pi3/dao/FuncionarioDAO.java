@@ -157,12 +157,13 @@ public class FuncionarioDAO {
             //Abre uma conexão com o banco de dados
         
            connection = obterConexao();
-            String sql = "UPDATE funcionario set ativo = "+"N"+" WHERE codigo=?";
+            String sql = "UPDATE funcionario SET ativo = ? WHERE id=?";
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
             //Setando valores
-            preparedStatement.setLong(1, codigo);
+            preparedStatement.setString(1, "N");
+            preparedStatement.setLong(2, codigo);
             preparedStatement.executeUpdate();
 
         } finally {
