@@ -23,76 +23,77 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
-        
+
+
     </head>
     <body>          
         <nav>
-            <ul class="menu"></ul>
-        </nav>
+            <h1 style="color: white">Alterar Produto</h1>
 
-        <main class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 style="color: white">-------Alterar Produto-------</h1>
-                    <br>
-                    <div>
-                        <form method="post" action="${pageContext.request.contextPath}/AlterarProduto">
-                            <input type="hidden" value="${id}" name="codProd" id="codProd"/>
-                            
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="nome">Nome</label>
-                                <div class="col-sm-10"> 
-                                    <input type="text" value="${prod.nome}" name="nome" id="nome" />
+
+            <main class="container">
+                <div class="row">
+                    <div class="col-12">
+
+                        <br>
+                        <div>
+                            <form method="post" action="${pageContext.request.contextPath}/AlterarProduto">
+                                <input type="hidden" value="${id}" name="codProd" id="codProd"/>
+
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="nome">Nome</label>
+                                    <div class="col-sm-10"> 
+                                        <input type="text" value="${prod.nome}" name="nome" id="nome" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="marca">Marca</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="${prod.marca}" name="marca" id="marca" />
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="marca">Marca</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" value="${prod.marca}" name="marca" id="marca" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                            <fieldset>
-                                <label class="col-sm-2 col-form-label" for="categoria">Categorias</label>
-                                <ul>
-                                    <c:forEach items="${categoria}" var="cat">
-                                        <input type="radio" value="${cat.id}" id="${cat.id}" name="cat"/>${cat.nome}
-                                    </c:forEach>
-                                </ul>
-                            </fieldset>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
+                                <div class="form-group row">
+                                    <fieldset>
+                                        <label class="col-sm-2 col-form-label" for="categoria">Categorias</label>
+                                        <ul>
+                                            <c:forEach items="${categoria}" var="cat">
+                                                <input type="radio" value="${cat.id}" id="${cat.id}" name="cat"/>${cat.nome}
+                                            </c:forEach>
+                                        </ul>
+                                    </fieldset>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
-                                <div class="col-sm-10">
-                                    <input type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
-                                <div class="col-sm-10">
-                                    <textarea style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
+                                    <div class="col-sm-10">
+                                        <input type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
+                                    </div>
                                 </div>
-                            </div>
-                            <button type="submit">Salvar</button>
-                            <button type="reset">Limpar</button>
-                            <button type="reset" onClick="history.go(-1)">Voltar</button>
-                        </form>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
+                                    <div class="col-sm-10">
+                                        <textarea style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
+                                    </div>
+                                </div>
+                                <button type="submit">Salvar</button>
+                                <button type="reset">Limpar</button>
+                                <button type="reset" onClick="history.go(-1)">Voltar</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
+            </main>
+        </nav>
     </body>
 </html>

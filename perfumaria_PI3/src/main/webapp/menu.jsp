@@ -1,8 +1,3 @@
-<%-- 
-    Document   : logado
-    Created on : 29/10/2016, 10:15:57
-    Author     : willian.carvalho
---%>
 
 <!DOCTYPE html>
 <html>
@@ -20,14 +15,16 @@
                 <li><a href="#">Cadastros</a>
                     <ul>
                         <li><a href="cliente.jsp">Clientes</a></li>                       
+                        <li><a href="./IncluirFuncionario">Funcionários</a></li>
                         <li><a href="./IncluirProduto">Produtos</a></li>                  
                         <li><a href="usuario.jsp">Usuários</a></li> 
                     </ul>
                 </li>
-                <li><a href="#">Pesquisa</a>
+                <li><a href="#">Pesquisar</a>
                     <ul>
                         <li><a href="#">Clientes</a></li>
-                        <li><a href="./ConsultaProduto">Produtos</a></li>
+                        <li><a href="./ConsultaProduto">Produto</a></li>
+                        <li><a href="./ConsultaFuncionario">Funcionario</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Relatorios</a>

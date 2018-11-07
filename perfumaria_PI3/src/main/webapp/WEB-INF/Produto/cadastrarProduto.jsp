@@ -23,79 +23,73 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-        
+
 
 
     </head>
     <body>
         <nav>
-            <ul class="menu"></ul>
-        </nav>
-        
-        <main class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 style="color: white">-------Informações do Produto-------</h1>
-                    <br>
-                    <div>
-                        <form method="post" action="${pageContext.request.contextPath}/IncluirProduto">
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="nome">Nome</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="nome" id="nome" />
+            <h1 style="color: white">Cadastro do Produto</h1>
+            <main class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <div>
+                            <form method="post" action="${pageContext.request.contextPath}/IncluirProduto">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="nome">Nome</label>
+                                    <div class="col-sm-5">
+                                        <input style="width: 250px;" required="required" type="text" name="nome" id="nome" />
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" for="marca">Marca</label>
+                                    <div>
+                                        <input style="width: 250px;" required="required" type="text" name="marca" id="marca" />
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="marca">Marca</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="marca" id="marca" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                            <fieldset>
-                                <label class="col-sm-2 col-form-label" for="categoria">Categorias</label>
-                                <ul>
-                                    <c:forEach items="${categoria}" var="cat">
-                                        <input type="radio" value="${cat.nome}" id="${cat.id}" name="sexo"/>${cat.nome}
-                                    </c:forEach>
-                                </ul>
-                            </fieldset>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="qtd" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="prcompra" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
-                                <div class="col-sm-10">
-                                    <input type="text" name="prvenda" />
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
-                                <div class="col-sm-10">
-                                    <textarea style="width: 50%;" name="descricao"></textarea>
-                                </div>
-                            </div>
-                            
-                            <button type="submit">Salvar</button>
-                            <button type="reset">Limpar</button>
-                            <button type="reset" onClick="history.go(-1)">Voltar</button>
                                 
-                        </form>
+                                <div class="form-group row">
+                                    <fieldset>
+                                        <label class="col-sm-2 col-form-label" for="cat">Categoria</label>
+                                        <ul>
+                                            <c:forEach items="${categoria}" var="cat">
+                                                <input type="radio" value="${cat.nome}" id="${cat.id}" name="cat"/>${cat.nome}
+                                            </c:forEach>
+                                        </ul>
+                                    </fieldset>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
+                                    <div class="col-sm-10">
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" style="width: 250px;" required="required" type="text" name="qtd" />
+                                    </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
+                                    <div class="col-sm-5">
+                                        <input placeholder="0.00" style="width: 250px;" required="required" type="text" name="prcompra" />
+                                    </div>
+                                    <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
+                                    <div>
+                                        <input placeholder="0.00" style="width: 250px;" required="required" type="text" name="prvenda" />
+                                    </div>
+                                </div>
+                                
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
+                                    <div class="col-sm-10">
+                                        <textarea required="required" style="width: 900px;" name="descricao"></textarea>
+                                    </div>
+                                </div>
 
+                                <button type="submit">Salvar</button>
+                                <button type="reset">Limpar</button>
+                                <button type="reset" onclick="window.location.href = 'menu.jsp';">Voltar</button>
+
+                            </form>
+
+                        </div>
                     </div>
                 </div>
-            </div>
-        </main>
-        
+            </main>
+        </nav>
     </body>
 </html>

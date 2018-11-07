@@ -32,61 +32,55 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
-
     </head>
     <body>  
         <nav>
-            <ul class="menu"></ul>
-        </nav>
-
-        <main class="container">
-            <div class="row">
-                <div class="col-12">
-                    <h1 style="color: white">-------Resultado-------</h1>
-                    <br>
-                    <div>
-                        <form method="post" action="${pageContext.request.contextPath}/ExcluirProduto">
-                            <div>
+            <h1 style="color: white">Resultado..</h1>
+            <main class="container">
+                <div class="row">
+                    <div class="col-12">                       
+                        <div>
+                            <form method="post" action="${pageContext.request.contextPath}/ExcluirProduto">
+                                <div>                                    
+                                    <table border= 1>
+                                        <tr>
+                                            <td align=middle width=100>Id</td>
+                                            <td align=middle width=100>Nome</td>
+                                            <td align=middle width=100>Marca</td>
+                                            <td align=middle width=100>Descrição</td>
+                                            <td align=middle width=120>Preço Compra</td>
+                                            <td align=middle width=100>Preço Venda</td>
+                                            <td align=middle width=100>Quantidade</td>
+                                            <td align=middle width=150>Data de Cadastro</td>
+                                        </tr>
+                                        <tr>
+                                            <td align=middle><c:out value="${prod.id}"/></td>
+                                            <td align=middle><c:out value="${prod.nome}"/></td>
+                                            <td align=middle><c:out value="${prod.marca}" /></td>
+                                            <td align=middle><c:out value="${prod.descricao}" /></td>
+                                            <td align=middle><fmt:formatNumber value="${prod.precoCompra}" type="currency" /></td>
+                                            <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
+                                            <td align=middle><c:out value="${prod.quantidade}" /></td>
+                                            <td align=middle><fmt:formatDate value="${prod.dataCadastro}"/></td>
+                                        </tr>
+                                    </table>
+                                </div>
                                 <br>
-                                <table border= 1>
-                                    <tr>
-                                        <td align=middle width=100>Id</td>
-                                        <td align=middle width=100>Nome</td>
-                                        <td align=middle width=100>Marca</td>
-                                        <td align=middle width=100>Descrição</td>
-                                        <td align=middle width=120>Preço Compra</td>
-                                        <td align=middle width=100>Preço Venda</td>
-                                        <td align=middle width=100>Quantidade</td>
-                                        <td align=middle width=150>Data de Cadastro</td>
-                                    </tr>
-                                    <tr>
-                                        <td align=middle><c:out value="${prod.id}"/></td>
-                                        <td align=middle><c:out value="${prod.nome}"/></td>
-                                        <td align=middle><c:out value="${prod.marca}" /></td>
-                                        <td align=middle><c:out value="${prod.descricao}" /></td>
-                                        <td align=middle><fmt:formatNumber value="${prod.precoCompra}" type="currency" /></td>
-                                        <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
-                                        <td align=middle><c:out value="${prod.quantidade}" /></td>
-                                        <td align=middle><fmt:formatDate value="${prod.dataCadastro}"/></td>
-                                    </tr>
-                                </table>
-                             </div>
-                                    <br>
-                                 <div>
-                                <button type="submit" value="${prod.id}" name="id">Excluir</button>
-                        
-                                </form>
-                                <form method="get" action="${pageContext.request.contextPath}/ConsultaProduto">
-                                    <button type="submit">Voltar</button>
-                                </form>
+                                <div>
+                                    <button type="submit" value="${prod.id}" name="id">Excluir</button>
+
+                            </form>
+                            <form method="get" action="${pageContext.request.contextPath}/ConsultaProduto">
+                                <button type="button" onclick="window.location.href = 'menu.jsp';">Voltar</button>
+                            </form>
                             <form method="get" action="${pageContext.request.contextPath}/AlterarProduto">
                                 <button type="submit" value="${prod.id}" name="id">Alterar</button>
                             </form>
-                            </div>
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </main>
-
+                </div>
+            </main>
+        </nav>
     </body>
 </html>
