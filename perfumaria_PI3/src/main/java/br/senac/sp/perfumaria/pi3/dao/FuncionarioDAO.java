@@ -85,7 +85,7 @@ public class FuncionarioDAO {
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o funcionario
         //com o ID informado e que esteja ativo ("habilitado" com "true")
-        String sql = "SELECT * FROM FUNCIONARIO WHERE ID=?";
+        String sql = "SELECT * FROM FUNCIONARIO WHERE ID=? AND ATIVO=?";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -101,7 +101,7 @@ public class FuncionarioDAO {
             preparedStatement = connection.prepareStatement(sql);
             //Configura os parâmetros do "PreparedStatement"
             preparedStatement.setLong(1, id);
-
+            preparedStatement.setString(2, "S");
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
 
