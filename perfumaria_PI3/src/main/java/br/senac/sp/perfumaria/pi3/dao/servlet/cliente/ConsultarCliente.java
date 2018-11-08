@@ -42,9 +42,12 @@ public class ConsultarCliente extends HttpServlet{
         
         Cliente cliente= null;
         try {
+            if(ClienteDAO.pesquisar(id) == null){
+                JOptionPane.showMessageDialog(null, "Cliente não encontrado");
+            }else
             cliente = ClienteDAO.pesquisar(id);
         } catch (Exception e) {
-             JOptionPane.showConfirmDialog(null, e);
+             JOptionPane.showMessageDialog(null, "Cliente não encontrado");
         }
         request.setAttribute("cliente", cliente);
         

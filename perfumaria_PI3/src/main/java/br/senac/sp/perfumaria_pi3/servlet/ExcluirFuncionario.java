@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -45,8 +46,9 @@ public class ExcluirFuncionario extends HttpServlet {
         try 
         {
            FuncionarioDAO.remove(id);
-
+           JOptionPane.showMessageDialog(null, "Funcionário desativado");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao desativar funcionario. Erro encontrado: "+e);
         }
         
         RequestDispatcher dispatcher

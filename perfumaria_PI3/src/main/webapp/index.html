@@ -1,37 +1,41 @@
+
 <!DOCTYPE html>
 
 <html>
-	<head>
-                <link rel="stylesheet" href="formatacao.css">
-		<title>Controle de Acesso</title>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	</head>
-	<body>
-            
-		<p style="color: blue; text-align: center;">
-			<span style="font-size:24px;"><span style="font-family:arial,helvetica,sans-serif;"><strong><span style="color:#000000;">Sistema de Gest&atilde;o de Perfumarias - SGP</span></strong></span></span></p>
-		<div style="text-align: center;">
-			&nbsp;</div>
-		<div style="page-break-after: always;">
-			<span style="display: none;">&nbsp;</span></div>
-		<div class="login">
-			<div style="text-align: center;">
-				&nbsp;</div>
-		</div>
-		<form action ="menu.jsp" method="post">
-                    
-			<p style="text-align: center;">
-				Login:&nbsp;<input name="login" size="20" type="text" /></p>
-			<p style="text-align: center;">
-				Senha:&nbsp;<input name="senha" size="20" type="password" /></p>
-			<p style="text-align: center;">
-				<input type="submit" value="Confirmar" />&nbsp; &nbsp;&nbsp;
-                                <input name="cancelar" type="reset" value="Cancelar" /></p>
-		</form>
-  
-	</body>
-        
-        
+    <head>
+        <link href="formatacao.css" type="text/css" rel="stylesheet" />
+        <title>Controle de Acesso</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body>
+        <div id="logindialog" title="Sistema de Gestao de Farmacias - SGF">
+            <div id="login-dialog-content-container">
+                <p style="color: blue; text-align: center;">
+                    <span style="font-size:24px;"><span style="font-family:arial,helvetica,sans-serif;"><strong><span style="color:#000000;">Sistema de Gest&atilde;o de Perfumarias - SGP</span></strong></span></span></p>
+                <div style="text-align: center;">
+                    &nbsp;</div>
+                <div style="page-break-after: always;">
+                    <span style="display: none;">&nbsp;</span></div>
+                <div class="login">
+                    <div style="text-align: center;">
+                        &nbsp;</div>
+                </div>
+                <form method="post" id="loginform" name="loginform" action="menu.jsp">
+
+                    <p style="text-align: center;">
+                        Login:&nbsp;<input class="form-input" id="username" name="username" placeholder="Usuário" type="text" /></p>
+                    <p style="text-align: center;">
+                        Senha:&nbsp;<input class="form-input" id="password" name="password" placeholder="Senha" type="password" /></p>
+                    <p style="text-align: center;">
+                        <input type="submit" class="login-form-btn" id="login" value="Confirmar" />&nbsp; &nbsp;&nbsp;
+                        <input name="cancelar" type="reset" value="Cancelar" /></p>
+                </form>
+            </div>
+        </div>
+        <script src="js/jquery-3.3.1.min.js" type="text/javascript"></script>
+    </body>
+
+
 </html>
 

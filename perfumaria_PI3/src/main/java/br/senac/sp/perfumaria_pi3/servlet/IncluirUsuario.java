@@ -3,10 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria.pi3.dao.servlet.cliente;
+package br.senac.sp.perfumaria_pi3.servlet;
 
-import br.senac.sp.perfumaria.pi3.dao.ClienteDAO;
+import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
+import br.senac.sp.perfumaria.pi3.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -17,20 +19,18 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Bruno
+ * @author Michael
  */
-@WebServlet(name = "ExcluirCliente", urlPatterns = {"/ExcluirCliente"})
-public class ExcluirCliente extends HttpServlet {
+@WebServlet(name = "IncluirUsuario", urlPatterns = {"/IncluirUsuario"})
+public class IncluirUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Cliente/resultadoConsulta.jsp");
+                = request.getRequestDispatcher("WEB-INF/Usuario/cadastrarUsuario.jsp");
         dispatcher.forward(request, response);
-
     }
 
     @Override
@@ -38,18 +38,26 @@ public class ExcluirCliente extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String codigo = request.getParameter("id");
-        long id = Long.parseLong(codigo);
-        //Conexão para abertura e fechamento
+        String nome = request.getParameter("nome");
+        String login = request.getParameter("login");
+        String senha = request.getParameter("senha");
+        String ativo = "S";
+
+        Usuario u = new Usuario(nome, login, senha, ativo);
+
         try {
-            ClienteDAO.excluirCliente(id);
-            JOptionPane.showMessageDialog(null, "Cliente desativado");
+            UsuarioDAO.inserir(u);
+            JOptionPane.showMessageDialog(null, "Usuário cadastrado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao desativar cliente. Erro encontrado: "+e);
+            JOptionPane.showMessageDialog(null,"Erro ao cadastrar usuário. Erro encontrado: "+ e);
         }
 
+        request.setAttribute("usuario", u);
+
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Cliente/resultadoConsulta.jsp");
+                = request.getRequestDispatcher(
+                        "WEB-INF/Usuario/cadastrarUsuario.jsp");
         dispatcher.forward(request, response);
+
     }
 }

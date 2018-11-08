@@ -2,14 +2,14 @@
 <!DOCTYPE html>
 <html>
     <head>
-       
+
         <link href="formatacao.css" type="text/css" rel="stylesheet" />
         <title>Menu Principal</title>
         <meta charset="UTF-8">
-                
+
     </head>
     <body>
-        
+
         <nav >
             <ul class="menu">
                 <li><a href="#">Cadastros</a>
@@ -17,14 +17,15 @@
                         <li><a href="./CadastrarCliente">Clientes</a></li>                       
                         <li><a href="./IncluirFuncionario">Funcionários</a></li>
                         <li><a href="./IncluirProduto">Produtos</a></li>                  
-                        <li><a href="usuario.jsp">Usuários</a></li> 
+                        <li><a href="./IncluirUsuario">Usuários</a></li> 
                     </ul>
                 </li>
                 <li><a href="#">Pesquisar</a>
                     <ul>
                         <li><a href="./ConsultarCliente">Clientes</a></li>
                         <li><a href="./ConsultaProduto">Produto</a></li>
-                        <li><a href="./ConsultaFuncionario">Funcionario</a></li>
+                        <li><a href="./ConsultaFuncionario">Funcionário</a></li>
+                        <li><a href="./ConsultaUsuario">Usuário</a></li>
                     </ul>
                 </li>
                 <li><a href="#">Relatorios</a>
@@ -36,9 +37,12 @@
                 </li>
                 <li><a href="#">Sobre</a>
                 </li>
-                <li><a href="#">Usuário: ${nome}</a></li>
+                <li><a href="#">Usuário: ${nome}</a>
+                    <ul>
+                        <li><a href="index.html">Sair</a></li>
+                    </ul>
+                </li>
             </ul>
-            <div class="imagem"></div>
         </nav>
         <%@ include file="/rodape.jsp"%> 
     </body>

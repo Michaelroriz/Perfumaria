@@ -32,17 +32,12 @@
     <body>          
         <nav>
             <h2 style="color: white">Alterar Funcionario</h2>
-
-
             <main class="container">
                 <div class="row">
-                    <div class="col-12">
-
-                        <br>
+                    <div class="col-12">                       
                         <div>
                             <form method="post" action="${pageContext.request.contextPath}/AlterarFuncionario">
                                 <input type="hidden" value="${id}" name="codFunc" id="codFunc"/>
-
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                     <div class="col-sm-5">

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 /**
  *
  * @author Bruno
@@ -35,9 +36,12 @@ import javax.servlet.http.HttpServletResponse;
         
         Produto produto = null;
         try {
+            if(ProdutoDAO.obter(id) == null){
+                JOptionPane.showMessageDialog(null, "Produto não encontrado");
+            }else
             produto = ProdutoDAO.obter(id);
         } catch (Exception e) {
-             e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "Produto não encontrado");             
         }
         request.setAttribute("prod", produto);
         

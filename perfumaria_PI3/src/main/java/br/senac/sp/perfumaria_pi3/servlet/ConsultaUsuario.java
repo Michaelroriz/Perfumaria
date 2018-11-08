@@ -5,9 +5,10 @@
  */
 package br.senac.sp.perfumaria_pi3.servlet;
 
-import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
-import br.senac.sp.perfumaria.pi3.model.Funcionario;
+import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
+import br.senac.sp.perfumaria.pi3.model.Usuario;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,15 +21,15 @@ import javax.swing.JOptionPane;
  *
  * @author Michael
  */
-@WebServlet(name = "ConsultaFuncionario", urlPatterns = {"/ConsultaFuncionario"})
-public class ConsultaFuncionario extends HttpServlet {
+@WebServlet(name = "ConsultaUsuario", urlPatterns = {"/ConsultaUsuario"})
+public class ConsultaUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Funcionario/pesquisaFuncionario.jsp");
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Usuario/pesquisaUsuario.jsp");
         dispatcher.forward(request, response);
     }
     
@@ -40,19 +41,18 @@ public class ConsultaFuncionario extends HttpServlet {
         //Variavel do id
         long id = Long.parseLong(request.getParameter("id"));
         
-        Funcionario funcionario = null;
-        try {
-            if(FuncionarioDAO.obter(id) == null){
-                JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
+        Usuario usuario = null;
+        try {if(UsuarioDAO.obter(id) == null){
+                JOptionPane.showMessageDialog(null, "Usuario não encontrado");
             }else
-            funcionario = FuncionarioDAO.obter(id);
+            usuario = UsuarioDAO.obter(id);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
+            JOptionPane.showMessageDialog(null, "Usuario não encontrado");
         }
-        request.setAttribute("func", funcionario);
+        request.setAttribute("usuario", usuario);
         
         //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Funcionario/exibirFuncionario.jsp").forward(request, response); 
+        request.getRequestDispatcher("WEB-INF/Usuario/exibirUsuario.jsp").forward(request, response); 
 
     }
 }

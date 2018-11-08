@@ -33,17 +33,12 @@
     <body>          
         <nav>
             <h2 style="color: white">Alterar Cliente</h2>
-
-
             <main class="container">
                 <div class="row">
                     <div class="col-12">
-
-                        <br>
                         <div>
                             <form method="post" action="${pageContext.request.contextPath}/AlterarCliente">
                                 <input type="hidden" value="${id}" name="codCliente" id="codCliente"/>
-
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                     <div class="col-sm-5">
@@ -54,7 +49,8 @@
                                     <select name="sexo" value="${cliente.sexo}">                                        
                                         <option value="M">Masculino</option>
                                         <option value="F">Feminino</option>                                        
-                                    </select>                                
+                                    </select> 
+                                </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="endereco">Endereço</label>
                                     <div class="col-sm-5">
@@ -62,7 +58,7 @@
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="bairro">Bairro</label>
                                     <div >
-                                        <input required="required" type="text" name="bairro" value="${cliente.bairro}" />
+                                        <input  required="required" type="text" name="bairro" value="${cliente.bairro}" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -73,7 +69,9 @@
                                     <label class="col-sm-2 col-form-label" for="estado">Estado</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return false; else return true;" value="${cliente.estado}" maxlength="2" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
+                                                    return false;
+                                                else
+                                                    return true;" value="${cliente.estado}" maxlength="2" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
                                     </div>
                                 </div>
 
@@ -81,19 +79,23 @@
                                     <label class="col-sm-2 col-form-label" for="cep">Cep</label>
                                     <div class="col-sm-10">
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${cliente.cep}" maxlength="9" placeholder="000-00000" required="required" type="text" name="cep"/>
+                                                    return true;
+                                                else
+                                                    return false;" value="${cliente.cep}" maxlength="9" placeholder="000-00000" required="required" type="text" name="cep"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="telefone">Telefone</label>
                                     <div class="col-sm-5">
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${cliente.telefone}" maxlength="14" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
+                                                    return true; else
+                                                    return false;" value="${cliente.telefone}" maxlength="14" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="celular">Celular</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${cliente.celular}" maxlength="14" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
+                                                    return true; else
+                                                    return false;" value="${cliente.celular}" maxlength="14" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
                                     </div>
                                 </div> 
                                 <button type="submit">Salvar</button>

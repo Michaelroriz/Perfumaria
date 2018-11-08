@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -46,8 +47,9 @@ public class ExcluirProduto extends HttpServlet {
         try 
         {
            ProdutoDAO.remove(id);
-
+           JOptionPane.showMessageDialog(null, "Produto excluído do banco de dados");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao excluir produto. Erro encotrado: "+e);
         }
         
         RequestDispatcher dispatcher

@@ -17,6 +17,7 @@ import br.senac.sp.perfumaria.pi3.model.Categoria;
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -70,8 +71,9 @@ public class IncluirProduto extends HttpServlet {
         try {
            categorias2 = ProdutoDAO.obterCategoria();
            ProdutoDAO.inserir(p);
-
+           JOptionPane.showMessageDialog(null, "Produto cadastrado");
         } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,"Erro ao cadastrar produto. Erro encontrado: "+ e);
         }
         
         request.setAttribute("prod", p);

@@ -8,8 +8,6 @@ package br.senac.sp.perfumaria_pi3.servlet;
 import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
 import br.senac.sp.perfumaria.pi3.model.Funcionario;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -53,9 +51,9 @@ public class IncluirFuncionario extends HttpServlet {
         
         try {           
            FuncionarioDAO.inserir(f);
-
+           JOptionPane.showMessageDialog(null, "Funcionario cadastrado");
         } catch (Exception e) {
-            JOptionPane.showConfirmDialog(null, e);
+           JOptionPane.showMessageDialog(null,"Erro ao cadastrar funcionário. Erro encontrado: "+ e);
         }
         
         request.setAttribute("func", f);                

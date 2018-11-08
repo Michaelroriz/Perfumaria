@@ -5,9 +5,9 @@
  */
 package br.senac.sp.perfumaria_pi3.servlet;
 
-import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
-import br.senac.sp.perfumaria.pi3.model.Funcionario;
+import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
 import java.io.IOException;
+import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,39 +20,39 @@ import javax.swing.JOptionPane;
  *
  * @author Michael
  */
-@WebServlet(name = "ConsultaFuncionario", urlPatterns = {"/ConsultaFuncionario"})
-public class ConsultaFuncionario extends HttpServlet {
+@WebServlet(name = "ExcluirUsuario", urlPatterns = {"/ExcluirUsuario"})
+public class ExcluirUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Funcionario/pesquisaFuncionario.jsp");
+        //Variavel do id
+
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Usuario/exibirUsuario.jsp");
         dispatcher.forward(request, response);
+
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        //Variavel do id
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        Funcionario funcionario = null;
-        try {
-            if(FuncionarioDAO.obter(id) == null){
-                JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
-            }else
-            funcionario = FuncionarioDAO.obter(id);
+        String codigo = request.getParameter("id");
+        long id = Long.parseLong(codigo);
+        //Conexão para abertura e fechamento
+        try 
+        {
+           UsuarioDAO.remove(id);
+           JOptionPane.showMessageDialog(null, "Usuário desativado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
+            JOptionPane.showMessageDialog(null, "Erro ao desativar usuario. Erro encontrado: "+e);
         }
-        request.setAttribute("func", funcionario);
         
-        //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Funcionario/exibirFuncionario.jsp").forward(request, response); 
-
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Usuario/exibirUsuario.jsp");
+        dispatcher.forward(request, response);
     }
 }

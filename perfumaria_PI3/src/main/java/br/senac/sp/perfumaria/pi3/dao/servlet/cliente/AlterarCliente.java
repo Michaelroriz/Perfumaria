@@ -14,6 +14,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -32,9 +33,9 @@ public class AlterarCliente extends HttpServlet{
        Cliente cliente = null;
         try {
             cliente = ClienteDAO.pesquisar(id);
-            
+            JOptionPane.showMessageDialog(null, "Dado(s) do cliente alterado(s)");
         } catch (Exception e) {
-             e.printStackTrace();
+             JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) de cliente. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("cliente", cliente);

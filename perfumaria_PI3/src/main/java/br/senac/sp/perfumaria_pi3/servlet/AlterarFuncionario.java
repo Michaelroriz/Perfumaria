@@ -15,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -66,9 +67,9 @@ public class AlterarFuncionario extends HttpServlet {
         try {
            
            FuncionarioDAO.alterar(f);
-           
+           JOptionPane.showMessageDialog(null, "Dado(s) de funcionário alterado(s)");
         } catch (Exception e) {
-
+           JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) de funcionário. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("func", f);              
