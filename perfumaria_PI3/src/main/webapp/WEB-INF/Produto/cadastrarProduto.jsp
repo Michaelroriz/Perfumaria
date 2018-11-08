@@ -51,7 +51,7 @@
                                         <label class="col-sm-2 col-form-label" for="cat">Categoria</label>
                                         <ul>
                                             <c:forEach items="${categoria}" var="cat">
-                                                <input type="radio" value="${cat.nome}" id="${cat.id}" name="cat"/>${cat.nome}
+                                                <input type="radio" value="${cat.id}" id="${cat.id}" name="cat"/>${cat.nome}
                                             </c:forEach>
                                         </ul>
                                     </fieldset>
