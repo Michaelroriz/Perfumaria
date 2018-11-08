@@ -64,9 +64,7 @@ public class IncluirUsuario extends HttpServlet {
         try {
 //            funcionario = UsuarioDAO.obterFuncionario();
             UsuarioDAO.inserir(u);
-            JOptionPane.showMessageDialog(null, "Usuário cadastrado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar usuário. Erro encontrado: "+ e);
         }
 
         request.setAttribute("usuario", u);

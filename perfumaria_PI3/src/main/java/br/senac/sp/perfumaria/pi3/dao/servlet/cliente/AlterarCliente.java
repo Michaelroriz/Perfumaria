@@ -66,9 +66,7 @@ public class AlterarCliente extends HttpServlet{
         try {
            
           ClienteDAO.alterarCliente(cliente);
-           JOptionPane.showMessageDialog(null, "Dado(s) do cliente alterado(s)");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) de cliente. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("cliente", cliente);              

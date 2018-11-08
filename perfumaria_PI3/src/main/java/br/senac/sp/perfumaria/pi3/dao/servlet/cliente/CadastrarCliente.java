@@ -48,9 +48,7 @@ public class CadastrarCliente extends HttpServlet {
         try {
             
             ClienteDAO.inserirCliente(cliente);
-            JOptionPane.showMessageDialog(null, "Cliente cadastrado");
         }   catch (Exception e) {
-            JOptionPane.showMessageDialog(null,"Erro ao cadastrar cliente. Erro encontrado: "+ e);
         }
         
         request.setAttribute("cliente", cliente);                

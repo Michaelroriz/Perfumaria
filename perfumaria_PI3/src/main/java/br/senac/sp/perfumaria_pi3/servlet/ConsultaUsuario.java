@@ -42,12 +42,9 @@ public class ConsultaUsuario extends HttpServlet {
         long id = Long.parseLong(request.getParameter("id"));
         
         Usuario usuario = null;
-        try {if(UsuarioDAO.obter(id) == null){
-                JOptionPane.showMessageDialog(null, "Usuario não encontrado");
-            }else
+        try {
             usuario = UsuarioDAO.obter(id);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Usuario não encontrado");
         }
         request.setAttribute("usuario", usuario);
         

@@ -46,9 +46,7 @@ public class ExcluirFuncionario extends HttpServlet {
         try 
         {
            FuncionarioDAO.remove(id);
-           JOptionPane.showMessageDialog(null, "Funcionário desativado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao desativar funcionario. Erro encontrado: "+e);
         }
         
         RequestDispatcher dispatcher

@@ -46,9 +46,7 @@ public class ExcluirUsuario extends HttpServlet {
         try 
         {
            UsuarioDAO.remove(id);
-           JOptionPane.showMessageDialog(null, "Usuário desativado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao desativar usuario. Erro encontrado: "+e);
         }
         
         RequestDispatcher dispatcher

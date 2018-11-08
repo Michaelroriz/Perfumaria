@@ -60,9 +60,7 @@ public class AlterarUsuario extends HttpServlet {
         u.setId(id);
         try {           
            UsuarioDAO.alterar(u);
-           JOptionPane.showMessageDialog(null, "Dado(s) do usuário alterado(s)");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) de usuário. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("func", u);              

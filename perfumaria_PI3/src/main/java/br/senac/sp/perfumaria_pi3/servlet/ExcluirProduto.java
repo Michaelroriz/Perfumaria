@@ -47,9 +47,8 @@ public class ExcluirProduto extends HttpServlet {
         try 
         {
            ProdutoDAO.remove(id);
-           JOptionPane.showMessageDialog(null, "Produto excluído do banco de dados");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao excluir produto. Erro encotrado: "+e);
+
         }
         
         RequestDispatcher dispatcher

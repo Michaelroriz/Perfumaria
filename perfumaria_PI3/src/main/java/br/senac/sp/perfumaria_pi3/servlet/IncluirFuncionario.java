@@ -51,9 +51,7 @@ public class IncluirFuncionario extends HttpServlet {
         
         try {           
            FuncionarioDAO.inserir(f);
-           JOptionPane.showMessageDialog(null, "Funcionario cadastrado");
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null,"Erro ao cadastrar funcionário. Erro encontrado: "+ e);
         }
         
         request.setAttribute("func", f);                

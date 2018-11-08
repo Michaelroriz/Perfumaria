@@ -36,12 +36,8 @@ import javax.swing.JOptionPane;
         
         Produto produto = null;
         try {
-            if(ProdutoDAO.obter(id) == null){
-                JOptionPane.showMessageDialog(null, "Produto não encontrado");
-            }else
             produto = ProdutoDAO.obter(id);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Produto não encontrado");             
         }
         request.setAttribute("prod", produto);
         

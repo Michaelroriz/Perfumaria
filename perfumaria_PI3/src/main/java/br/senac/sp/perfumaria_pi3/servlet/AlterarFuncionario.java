@@ -67,9 +67,7 @@ public class AlterarFuncionario extends HttpServlet {
         try {
            
            FuncionarioDAO.alterar(f);
-           JOptionPane.showMessageDialog(null, "Dado(s) de funcionário alterado(s)");
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) de funcionário. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("func", f);              

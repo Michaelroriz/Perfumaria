@@ -43,9 +43,7 @@ public class ExcluirCliente extends HttpServlet {
         //Conexão para abertura e fechamento
         try {
             ClienteDAO.excluirCliente(id);
-            JOptionPane.showMessageDialog(null, "Cliente desativado");
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Erro ao desativar cliente. Erro encontrado: "+e);
         }
 
         RequestDispatcher dispatcher

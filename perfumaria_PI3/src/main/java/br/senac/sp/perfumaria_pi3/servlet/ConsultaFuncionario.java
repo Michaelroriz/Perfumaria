@@ -42,12 +42,8 @@ public class ConsultaFuncionario extends HttpServlet {
         
         Funcionario funcionario = null;
         try {
-            if(FuncionarioDAO.obter(id) == null){
-                JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
-            }else
             funcionario = FuncionarioDAO.obter(id);
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Funcionário não encontrado");
         }
         request.setAttribute("func", funcionario);
         

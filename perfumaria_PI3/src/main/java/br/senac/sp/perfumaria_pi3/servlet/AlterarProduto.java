@@ -80,9 +80,7 @@ public class AlterarProduto extends HttpServlet {
            categorias2 = ProdutoDAO.obterCategoria();
            ProdutoDAO.alterar(p);
            ProdutoDAO.alterarCategoriaProduto(categorias, id);
-           JOptionPane.showMessageDialog(null, "Dado(s) do produto alterado(s)");
         } catch (Exception e) {
-           JOptionPane.showMessageDialog(null, "Erro ao alterar dado(s) do produto. Erro encontrado: "+e);
         }
         request.setAttribute("id", id);
         request.setAttribute("prod", p);
