@@ -14,7 +14,7 @@
             <ul class="menu">
                 <li><a href="#">Cadastros</a>
                     <ul>
-                        <li><a href="cliente.jsp">Clientes</a></li>                       
+                        <li><a href="./CadastrarCliente">Clientes</a></li>                       
                         <li><a href="./IncluirFuncionario">Funcionários</a></li>
                         <li><a href="./IncluirProduto">Produtos</a></li>                  
                         <li><a href="usuario.jsp">Usuários</a></li> 
@@ -22,7 +22,7 @@
                 </li>
                 <li><a href="#">Pesquisar</a>
                     <ul>
-                        <li><a href="#">Clientes</a></li>
+                        <li><a href="./ConsultarCliente">Clientes</a></li>
                         <li><a href="./ConsultaProduto">Produto</a></li>
                         <li><a href="./ConsultaFuncionario">Funcionario</a></li>
                     </ul>

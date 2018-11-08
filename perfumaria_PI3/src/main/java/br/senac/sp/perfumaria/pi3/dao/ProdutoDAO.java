@@ -59,7 +59,7 @@ public class ProdutoDAO {
             while (rs.next()) {
                 Produto produto = new Produto();
 
-                long codigo = rs.getInt("ID");
+                long codigo = rs.getLong("ID");
                 String nome = rs.getString("NOME");
                 String marca = rs.getString("MARCA");
                 String descricao = rs.getString("DESCRICAO");

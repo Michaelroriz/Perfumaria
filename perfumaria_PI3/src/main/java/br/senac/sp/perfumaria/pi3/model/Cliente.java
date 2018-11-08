@@ -13,7 +13,7 @@ import java.sql.Date;
  */
 public class Cliente {
     
-    private int id;
+    private Long id;
     private String nome;
     private String endereco;
     private String bairro;
@@ -42,9 +42,9 @@ public class Cliente {
           
     }
     
-    public int getId(){return id;}
+    public Long getId(){return id;}
     
-    public void setId(int id){
+    public void setId(Long id){
         
         this.id = id;
     }
@@ -125,7 +125,7 @@ public class Cliente {
     
     public Date getCadastroData(){return cadastroData;}
         
-    public void setDataCadastro(Date cadastroData) {
+    public void setCadastroData(Date cadastroData) {
         
         this.cadastroData = cadastroData;
         

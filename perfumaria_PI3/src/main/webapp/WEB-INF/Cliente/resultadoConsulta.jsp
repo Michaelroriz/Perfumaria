@@ -1,10 +1,11 @@
 <%-- 
-    Document   : exibirFuncionario
-    Created on : 06/11/2018, 19:39:46
-    Author     : Michael
+    Document   : resultadoConsulta
+    Created on : 08/11/2018, 09:43:38
+    Author     : Bruno
 --%>
-<%@page import="br.senac.sp.perfumaria.pi3.model.Funcionario"%>
-<%@page import="br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO"%>
+
+<%@page import="br.senac.sp.perfumaria.pi3.model.Cliente"%>
+<%@page import="br.senac.sp.perfumaria.pi3.dao.ClienteDAO"%>
 <%@page import="java.sql.Connection"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -13,7 +14,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>Exibir</title>
+        <title>Consulta de dados do cliente</title>
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -42,13 +43,12 @@
                     <div class="col-12">
                         <br>
                         <div>
-                            <form method="post" action="${pageContext.request.contextPath}/ExcluirFuncionario">
+                            <form method="post" action="${pageContext.request.contextPath}/ExcluirCliente">
                                 <div>                                    
                                     <table border= 1>
                                         <tr>
                                             <td align=middle width=100>Id</td>
                                             <td align=middle width=100>Nome</td>
-                                            <td align=middle width=100>Cargo</td>
                                             <td align=middle width=100>Endereco</td>
                                             <td align=middle width=120>Bairro</td>
                                             <td align=middle width=100>Cidade</td>
@@ -60,28 +60,27 @@
                                             <td align=middle width=150>Data de Cadastro</td>
                                         </tr>
                                         <tr>
-                                            <td align=middle><c:out value="${func.id}"/></td>
-                                            <td align=middle><c:out value="${func.nome}"/></td>
-                                            <td align=middle><c:out value="${func.cargo}" /></td>
-                                            <td align=middle><c:out value="${func.endereco}" /></td>
-                                            <td align=middle><c:out value="${func.bairro}" /></td>
-                                            <td align=middle><c:out value="${func.cidade}" /></td>
-                                            <td align=middle><c:out value="${func.estado}" /></td>
-                                            <td align=middle><c:out value="${func.cep}" /></td>
-                                            <td align=middle><c:out value="${func.sexo}" /></td>
-                                            <td align=middle><c:out value="${func.telefone}" /></td>
-                                            <td align=middle><c:out value="${func.celular}" /></td>
-                                            <td align=middle><fmt:formatDate value="${func.dataCadastro}"/></td>
+                                            <td align=middle><c:out value="${cliente.id}"/></td>
+                                            <td align=middle><c:out value="${cliente.nome}"/></td>
+                                            <td align=middle><c:out value="${cliente.endereco}" /></td>
+                                            <td align=middle><c:out value="${cliente.bairro}" /></td>
+                                            <td align=middle><c:out value="${cliente.cidade}" /></td>
+                                            <td align=middle><c:out value="${cliente.estado}" /></td>
+                                            <td align=middle><c:out value="${cliente.cep}" /></td>
+                                            <td align=middle><c:out value="${cliente.sexo}" /></td>
+                                            <td align=middle><c:out value="${cliente.telefone}" /></td>
+                                            <td align=middle><c:out value="${cliente.celular}" /></td>
+                                            <td align=middle><fmt:formatDate value="${cliente.cadastroData}"/></td>
                                         </tr>
                                     </table>
                                 </div>
-                                <button type="submit" value="${func.id}" name="id">Excluir</button>
+                                <button type="submit" value="${cliente.id}" name="id">Excluir</button>
                             </form>
-                            <form method="get" action="${pageContext.request.contextPath}/ConsultaFuncionario">
+                            <form method="get" action="${pageContext.request.contextPath}/ConsultarCliente">
                                 <button type="button" onclick="window.location.href = 'menu.jsp';">Voltar</button>
                             </form>
-                            <form method="get" action="${pageContext.request.contextPath}/AlterarFuncionario">
-                                <button type="submit" value="${func.id}" name="id">Alterar</button>
+                            <form method="get" action="${pageContext.request.contextPath}/AlterarCliente">
+                                <button type="submit" value="${cliente.id}" name="id">Alterar</button>
                             </form>
                         </div>
                     </div>

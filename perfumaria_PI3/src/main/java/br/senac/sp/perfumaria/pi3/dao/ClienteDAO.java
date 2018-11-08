@@ -5,7 +5,6 @@
  */
 package br.senac.sp.perfumaria.pi3.dao;
 
-import static br.senac.sp.perfumaria.pi3.dao.ProdutoDAO.obterConexao;
 import br.senac.sp.perfumaria.pi3.model.Cliente;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -18,9 +17,9 @@ import java.util.List;
 
 public class ClienteDAO {
     
-    Connection conexao;
+        Connection conexao;
     
-      public ClienteDAO(Connection conexao) {
+        public ClienteDAO(Connection conexao) {
         
             this.conexao = conexao;
     }
@@ -57,7 +56,7 @@ public class ClienteDAO {
              
              Cliente cliente = new Cliente(); 
          
-             int id = rs.getInt("ID");
+             Long id = rs.getLong("ID");
              String nome = rs.getString("NOME");
              String endereco = rs.getString("ENDERECO");
              String bairro = rs.getString("BAIRRO");
@@ -78,7 +77,7 @@ public class ClienteDAO {
              cliente.setSexo(sexo);
              cliente.setTelefone(telefone);
              cliente.setCelular(celular);
-             cliente.setDataCadastro(cadData);
+             cliente.setCadastroData(cadData);
              
              clientes.add(cliente);   
          }   
@@ -91,11 +90,11 @@ public class ClienteDAO {
         return clientes;
     } 
 
-    public static void inserirCliente(Cliente cliente) throws SQLException, ClassNotFoundException {
+    public static void inserirCliente(Cliente cliente) throws SQLException, Exception {
 
         String sqlInserir =
-            "INSERT INTO CLIENTE(NOME,ENDERECO,BAIRRO,CIDADE,ESTADO,CEP,SEXO,TELEFONE,CELULAR,CADASTRO)"
-            + " VALUES (?,?,?,?,?,?,?,?,?, NOW())";
+            "INSERT INTO CLIENTE(NOME,ENDERECO,BAIRRO,CIDADE,ESTADO,CEP,SEXO,TELEFONE,CELULAR,CADASTRO,ATIVO)"
+            + " VALUES (?,?,?,?,?,?,?,?,?, NOW(),?)";
     
                 Connection connection = null;
             
@@ -112,10 +111,11 @@ public class ClienteDAO {
                 preparedStatement.setString(3, cliente.getBairro());
                 preparedStatement.setString(4, cliente.getCidade());
                 preparedStatement.setString(5, cliente.getEstado());
-                preparedStatement.setString(5, cliente.getCep());
-                preparedStatement.setString(5, cliente.getSexo());
-                preparedStatement.setString(5, cliente.getTelefone());
-                preparedStatement.setString(5, cliente.getCelular());
+                preparedStatement.setString(6, cliente.getCep());
+                preparedStatement.setString(7, cliente.getSexo());
+                preparedStatement.setString(8, cliente.getTelefone());
+                preparedStatement.setString(9, cliente.getCelular());
+                preparedStatement.setString(10, "S");
                 
                 preparedStatement.execute();
             }
@@ -131,9 +131,9 @@ public class ClienteDAO {
             }
     }
 
-    public static Cliente pesquisar(Integer id) throws SQLException, ClassNotFoundException{
+    public static Cliente pesquisar(Long id) throws SQLException, ClassNotFoundException{
         
-         String sqlPesquisa = "SELECT * FROM CLIENTE WHERE id = ?";
+         String sqlPesquisa = "SELECT * FROM CLIENTE WHERE ID = ? AND ATIVO = ?";
          
          Connection connection = null;
        
@@ -147,7 +147,8 @@ public class ClienteDAO {
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sqlPesquisa);
             //Configura os parâmetros do "PreparedStatement"
-            preparedStatement.setInt(1, id);
+            preparedStatement.setLong(1, id);
+            preparedStatement.setString(2, "S");
 
             //Executa a consulta SQL no banco de dados
             result = preparedStatement.executeQuery();
@@ -156,17 +157,17 @@ public class ClienteDAO {
                 
                 Cliente cliente = new Cliente();
                 
-                cliente.setId(result.getInt("ID"));
-                cliente.setNome(result.getString("NOME"));
-                cliente.setEndereco(result.getString("ENDERECO"));
-                cliente.setBairro(result.getString("BAIRRO"));
-                cliente.setCidade(result.getString("CIDADE"));
-                cliente.setEstado(result.getString("ESTADO"));
-                cliente.setCep(result.getString("CEP"));
-                cliente.setSexo(result.getString("SEXO"));
-                cliente.setTelefone(result.getString("TELEFONE"));
-                cliente.setCelular(result.getString("CELULAR"));
-                cliente.setDataCadastro(result.getDate("CADASTRO"));
+                cliente.setId(result.getLong("ID"));
+                cliente.setNome(result.getString("nome"));
+                cliente.setEndereco(result.getString("endereco"));
+                cliente.setBairro(result.getString("bairro"));
+                cliente.setCidade(result.getString("cidade"));
+                cliente.setEstado(result.getString("estado"));
+                cliente.setCep(result.getString("cep"));
+                cliente.setSexo(result.getString("sexo"));
+                cliente.setTelefone(result.getString("telefone"));
+                cliente.setCelular(result.getString("celular"));
+                cliente.setCadastroData(result.getDate("cadastro"));
                 
                 return cliente;
             }
@@ -175,22 +176,90 @@ public class ClienteDAO {
             if (result != null && !result.isClosed()) {
                 result.close();
             }
-            //Se o statement ainda estiver aberto, realiza seu fechamento
+            
             if (preparedStatement != null && !preparedStatement.isClosed()) {
                 preparedStatement.close();
             }
-            //Se a conexão ainda estiver aberta, realiza seu fechamento
+           
             if (connection != null && !connection.isClosed()) {
                 connection.close();
             }
         }
        
             return null;
+    }
+    public static void alterarCliente(Cliente cliente) throws SQLException, ClassNotFoundException{
+        
+         Connection connection = null;
+        
+         PreparedStatement preparedStatement = null;
+         
+         try{
+         connection = obterConexao();
+         
+         String sqlUpdate = "UPDATE cliente "
+                 +" SET NOME = ?, ENDERECO = ?,BAIRRO = ?,CIDADE = ?, ESTADO = ?, CEP = ?,SEXO = ? ,TELEFONE = ?, CELULAR = ?"
+                 +" WHERE id = ? ";
+         
+          preparedStatement = connection.prepareStatement(sqlUpdate);
+         
+                preparedStatement.setString(1, cliente.getNome());
+                preparedStatement.setString(2, cliente.getEndereco());
+                preparedStatement.setString(3, cliente.getBairro());
+                preparedStatement.setString(4, cliente.getCidade());
+                preparedStatement.setString(5, cliente.getEstado());
+                preparedStatement.setString(6, cliente.getCep());
+                preparedStatement.setString(7, cliente.getSexo());
+                preparedStatement.setString(8, cliente.getTelefone());
+                preparedStatement.setString(9, cliente.getCelular());
+                preparedStatement.setLong(10, cliente.getId());
+                
+                preparedStatement.executeUpdate();
+         
+         } finally{
+           
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
             
-        }
-
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+         }
+    }
+    
+    public static void excluirCliente(Long id) throws SQLException, ClassNotFoundException{
+             
+        Connection connection = null;     
+        
+        PreparedStatement preparedStatement = null;
+      
+             
+        try {
+            
+            connection = obterConexao();  
+            
+            String sqlExcluir = "UPDATE cliente SET ativo = ? WHERE ID = ?";
+            
+            preparedStatement = connection.prepareStatement(sqlExcluir);
+            
+            preparedStatement.setString(1, "N");
+            preparedStatement.setLong(2, id);
+            preparedStatement.executeUpdate();
+      
+        }finally{
+       
+            if (preparedStatement != null && !preparedStatement.isClosed()){ 
+            
+                preparedStatement.close();
+            }
+            if (connection != null && !connection.isClosed()){ 
+            
+                connection.close();
+            }
+        } 
+    }
 }
-
 
 
 
