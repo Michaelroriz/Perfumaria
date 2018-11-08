@@ -41,20 +41,21 @@
                         <div>
                             <form method="post" action="${pageContext.request.contextPath}/IncluirUsuario">
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="nome">Nome</label>
-                                    <div class="col-sm-10">
-                                        <input style="width: 300px;" required="required" type="text" name="nome" />
-                                    </div>
-
+                                    <label class="col-sm-2 col-form-label" for="func">Nome</label>
+                                    <select style="width: 300px;" name="func">                                          
+                                        <c:forEach items="${funcionario}" var="func">
+                                            <option  type="search" value="${func.nome}" id="${func.id}" name="func"/>${func.id} ${func.nome}
+                                        </c:forEach>
+                                    </select>                                    
                                 </div>
                                 <div class="form-group row">                                    
                                     <label class="col-sm-2 col-form-label" for="login">Login</label>
                                     <div class="col-sm-5">
-                                        <input style="width: 300px;" required="required" type="text" name="login" />                                                          
+                                        <input style="width: 250px;" required="required" type="text" name="login" />                                                          
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="senha">Senha</label>
                                     <div>
-                                        <input style="width: 300px;" required="required" type="text" name="senha" />
+                                        <input style="width: 250px;" required="required" type="text" name="senha" />
                                     </div>
                                 </div>
 

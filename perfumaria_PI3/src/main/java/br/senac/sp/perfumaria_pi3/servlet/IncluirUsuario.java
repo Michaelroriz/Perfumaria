@@ -6,9 +6,12 @@
 package br.senac.sp.perfumaria_pi3.servlet;
 
 import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
+import br.senac.sp.perfumaria.pi3.model.Funcionario;
 import br.senac.sp.perfumaria.pi3.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -28,8 +31,19 @@ public class IncluirUsuario extends HttpServlet {
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Usuario/cadastrarUsuario.jsp");
+        
+       
+                // Carregar aqui os departamentos
+        List<Funcionario> funcionario = new ArrayList<Funcionario>();
+
+        try {
+           funcionario = UsuarioDAO.obterFuncionario();
+        } catch (Exception e) {
+             e.printStackTrace();
+        }
+          
+        request.setAttribute("funcionario", funcionario);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Usuario/cadastrarUsuario.jsp");
         dispatcher.forward(request, response);
     }
 
@@ -38,14 +52,17 @@ public class IncluirUsuario extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String nome = request.getParameter("nome");
+        String nome = request.getParameter("func");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String ativo = "S";
 
-        Usuario u = new Usuario(nome, login, senha, ativo);
-
+        Usuario u = new Usuario(login, nome, senha, ativo);
+        // Carregar aqui os departamentos
+        List<Funcionario> funcionario = new ArrayList<Funcionario>();
+        
         try {
+//            funcionario = UsuarioDAO.obterFuncionario();
             UsuarioDAO.inserir(u);
             JOptionPane.showMessageDialog(null, "Usuário cadastrado");
         } catch (Exception e) {
@@ -53,6 +70,7 @@ public class IncluirUsuario extends HttpServlet {
         }
 
         request.setAttribute("usuario", u);
+//        request.setAttribute("func", funcionario);
 
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher(
