@@ -14,7 +14,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>TODO supply a title</title>
+        <title>Exibir Produto</title>
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -35,7 +35,7 @@
     </head>
     <body>  
         <nav>
-            <h1 style="color: white">Resultado..</h1>
+            <h2 style="color: white">Resultado..</h2>
             <main class="container">
                 <div class="row">
                     <div class="col-12">                       
@@ -82,5 +82,6 @@
                 </div>
             </main>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

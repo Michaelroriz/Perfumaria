@@ -29,7 +29,7 @@
     </head>
     <body>
         <nav>
-            <h1 style="color: white">Cadastro do Produto</h1>
+            <h2 style="color: white">Cadastro do Produto</h2>
             <main class="container">
                 <div class="row">
                     <div class="col-12">
@@ -45,7 +45,7 @@
                                         <input style="width: 250px;" required="required" type="text" name="marca" id="marca" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <fieldset>
                                         <label class="col-sm-2 col-form-label" for="cat">Categoria</label>
@@ -59,7 +59,10 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
                                     <div class="col-sm-10">
-                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" style="width: 250px;" required="required" type="text" name="qtd" />
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                                    return true;
+                                                else
+                                                    return false;" style="width: 250px;" required="required" type="text" name="qtd" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -72,7 +75,7 @@
                                         <input placeholder="0.00" style="width: 250px;" required="required" type="text" name="prvenda" />
                                     </div>
                                 </div>
-                                
+
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
                                     <div class="col-sm-10">
@@ -91,5 +94,6 @@
                 </div>
             </main>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

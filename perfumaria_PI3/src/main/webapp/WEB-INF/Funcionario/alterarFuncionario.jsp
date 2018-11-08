@@ -31,7 +31,7 @@
     </head>
     <body>          
         <nav>
-            <h1 style="color: white">Alterar Funcionario</h1>
+            <h2 style="color: white">Alterar Funcionario</h2>
 
 
             <main class="container">
@@ -78,24 +78,28 @@
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="estado">Estado</label>
                                     <div>
-                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return false; else return true;" value="${func.estado}" maxlength="2" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                                    return false; else return true;" value="${func.estado}" maxlength="2" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
                                     </div>
                                 </div>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="cep">Cep</label>
                                     <div class="col-sm-10">
-                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" value="${func.cep}" maxlength="9" placeholder="000-00000" required="required" type="text" name="cep"/>
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                                    return true; else return false;" value="${func.cep}" maxlength="9" placeholder="000-00000" required="required" type="text" name="cep"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="telefone">Telefone</label>
                                     <div class="col-sm-5">
-                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" value="${func.telefone}" maxlength="14" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                                    return true; else return false;" value="${func.telefone}" maxlength="14" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="celular">Celular</label>
                                     <div>
-                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" value="${func.celular}" maxlength="14" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
+                                        <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                                    return true; else return false;" value="${func.celular}" maxlength="14" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
                                     </div>
                                 </div> 
                                 <button type="submit">Salvar</button>
@@ -107,5 +111,6 @@
                 </div>
             </main>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

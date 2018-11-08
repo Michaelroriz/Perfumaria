@@ -5,7 +5,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>TODO supply a title</title>
+        <title>Alterar Produto</title>
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -28,29 +28,23 @@
     </head>
     <body>          
         <nav>
-            <h1 style="color: white">Alterar Produto</h1>
-
-
+            <h2 style="color: white">Alterar Produto</h2>
             <main class="container">
                 <div class="row">
-                    <div class="col-12">
-
-                        <br>
+                    <div class="col-12">                        
                         <div>
                             <form method="post" action="${pageContext.request.contextPath}/AlterarProduto">
                                 <input type="hidden" value="${id}" name="codProd" id="codProd"/>
 
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="nome">Nome</label>
-                                    <div class="col-sm-10"> 
-                                        <input type="text" value="${prod.nome}" name="nome" id="nome" />
+                                    <div class="col-sm-5"> 
+                                        <input style="width: 250px;" required="required" type="text" value="${prod.nome}" name="nome" id="nome" />
                                     </div>
-                                </div>
-                                <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="marca">Marca</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" value="${prod.marca}" name="marca" id="marca" />
-                                    </div>
+                                    <div >
+                                        <input style="width: 250px;" required="required" type="text" value="${prod.marca}" name="marca" id="marca" />
+                                    </div> 
                                 </div>
                                 <div class="form-group row">
                                     <fieldset>
@@ -62,38 +56,41 @@
                                         </ul>
                                     </fieldset>
                                 </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
-                                    <div class="col-sm-10">
-                                        <input type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
-                                    </div>
-                                </div>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
-                                    <div class="col-sm-10">
-                                        <textarea style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
-                                    </div>
-                                </div>
-                                <button type="submit">Salvar</button>
-                                <button type="reset">Limpar</button>
-                                <button type="reset" onClick="history.go(-1)">Voltar</button>
-                            </form>
                         </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
+                            <div class="col-sm-10">
+                                <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                    return true; else return false;" style="width: 250px;" required="required" type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
+                            </div>
+                        </div>
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
+                            <div class="col-sm-5">
+                                <input placeholder="0.00" style="width: 250px;" required="required" type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
+                            </div>
+                            <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
+                            <div >
+                                <input placeholder="0.00" style="width: 250px;" required="required" type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
+                            </div>
+                        </div>
+
+                        <div class="form-group row">
+                            <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
+                            <div class="col-sm-10">
+                                <textarea required="required" style="width: 900px;" style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
+                            </div>
+                        </div>
+                        <button type="submit">Salvar</button>
+                        <button type="reset">Limpar</button>
+                        <button type="reset" onClick="history.go(-1)">Voltar</button>
+
                     </div>
+                    </form>
+                </div>
                 </div>
             </main>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

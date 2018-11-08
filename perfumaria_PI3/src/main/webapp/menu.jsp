@@ -9,7 +9,7 @@
                 
     </head>
     <body>
-        <c:import url="cabecalho.jsp"/>
+        
         <nav >
             <ul class="menu">
                 <li><a href="#">Cadastros</a>
@@ -40,6 +40,6 @@
             </ul>
             <div class="imagem"></div>
         </nav>
-        
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

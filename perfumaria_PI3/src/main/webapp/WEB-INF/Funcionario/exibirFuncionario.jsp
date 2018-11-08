@@ -13,7 +13,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>TODO supply a title</title>
+        <title>Exibir Funcionario</title>
         <meta charset="UTF-8">        
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -36,7 +36,7 @@
     </head>
     <body>  
         <nav>
-            <h1 style="color: white">Resultado..</h1>
+            <h2 style="color: white">Resultado..</h2>
             <main class="container">
                 <div class="row">
                     <div class="col-12">
@@ -75,10 +75,7 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <br>
-                                <div>
-                                    <button type="submit" value="${func.id}" name="id">Excluir</button>
-
+                                <button type="submit" value="${func.id}" name="id">Excluir</button>
                             </form>
                             <form method="get" action="${pageContext.request.contextPath}/ConsultaFuncionario">
                                 <button type="button" onclick="window.location.href = 'menu.jsp';">Voltar</button>
@@ -91,5 +88,6 @@
                 </div>
             </main>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>

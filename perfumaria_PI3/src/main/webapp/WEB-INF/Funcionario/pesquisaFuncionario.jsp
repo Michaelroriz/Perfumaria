@@ -8,7 +8,7 @@
 <html>
     <head>
         <link rel="stylesheet" type="text/css" href="formatacao.css"/>
-        <title>Pesquisa Funcionario</title>
+        <title>Pesquisar Funcionario</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet"
@@ -37,7 +37,8 @@
                     <br><br>
                     <div class="centralizarLogin">
                         <form method="post" action="${pageContext.request.contextPath}/ConsultaFuncionario">                                                                                                          
-                            <label>ID&nbsp;&nbsp;<input required="required" onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode))) return true; else return false;" style="width: 112%;" type="text" name="id" id="id"/></label>
+                            <label>ID&nbsp;&nbsp;<input required="required" onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
+                                return true; else return false;" style="width: 112%;" type="text" name="id" id="id"/></label>
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -50,5 +51,6 @@
                 </div>
             </div>
         </nav>
+        <%@ include file="/rodape.jsp"%> 
     </body>
 </html>
