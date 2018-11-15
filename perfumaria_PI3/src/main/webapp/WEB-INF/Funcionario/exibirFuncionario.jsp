@@ -23,6 +23,7 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/functionsFuncionario.js" type="text/javascript"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -31,7 +32,7 @@
             src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
         crossorigin="anonymous"></script>
-
+        
 
     </head>
     <body>  
@@ -75,13 +76,13 @@
                                         </tr>
                                     </table>
                                 </div>
-                                <button type="submit" value="${func.id}" name="id">Excluir</button>
+                                <button type="submit" value="${func.id}" name="id" onClick="confirmationDelete()">Excluir</button>
                             </form>
-                            <form method="get" action="${pageContext.request.contextPath}/ConsultaFuncionario">
-                                <button type="button" onclick="window.location.href = 'menu.jsp';">Voltar</button>
-                            </form>
+                            
+                            <button type="button" onClick="voltar()">Voltar</button>
+                            
                             <form method="get" action="${pageContext.request.contextPath}/AlterarFuncionario">
-                                <button type="submit" value="${func.id}" name="id">Alterar</button>
+                                <button type="submit" value="${func.id}"  name="id">Alterar</button>
                             </form>
                         </div>
                     </div>

@@ -3,10 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria.pi3.dao.servlet.cliente;
+package br.senac.sp.perfumaria_pi3.servlet.funcionario;
 
-import br.senac.sp.perfumaria.pi3.dao.ClienteDAO;
-import br.senac.sp.perfumaria.pi3.model.Cliente;
+import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
+import br.senac.sp.perfumaria.pi3.model.Funcionario;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,15 +14,14 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Bruno
+ * @author Michael
  */
-@WebServlet(name = "AlterarCliente", urlPatterns = {"/AlterarCliente"})
-public class AlterarCliente extends HttpServlet{
-    
+@WebServlet(name = "AlterarFuncionario", urlPatterns = {"/AlterarFuncionario"})
+public class AlterarFuncionario extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
@@ -30,27 +29,28 @@ public class AlterarCliente extends HttpServlet{
         
         long id = Long.parseLong(request.getParameter("id"));
         
-       Cliente cliente = null;
+        Funcionario funcionario = null;
         try {
-            cliente = ClienteDAO.pesquisar(id);
+            funcionario = FuncionarioDAO.obter(id);
             
         } catch (Exception e) {
-             
+             e.printStackTrace();
         }
         request.setAttribute("id", id);
-        request.setAttribute("cliente", cliente);
+        request.setAttribute("func", funcionario);
         //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Cliente/alterarCliente.jsp")
-                .forward(request, response);        
+        request.getRequestDispatcher("WEB-INF/Funcionario/alterarFuncionario.jsp")
+                .forward(request, response);            
     }
-    
+
      @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        long id = Long.parseLong(request.getParameter("codCliente"));
+        long id = Long.parseLong(request.getParameter("codFunc"));
         String nome = request.getParameter("nome");
+        String cargo = request.getParameter("cargo");
         String endereco = request.getParameter("endereco");
         String bairro = request.getParameter("bairro");
         String cidade = request.getParameter("cidade");
@@ -58,21 +58,19 @@ public class AlterarCliente extends HttpServlet{
         String cep = request.getParameter("cep");
         String sexo = request.getParameter("sexo");
         String telefone = request.getParameter("telefone");
-        String celular = request.getParameter("celular");  
-        
-           Cliente cliente = new Cliente (nome,endereco,bairro,cidade,estado,cep,sexo,telefone,celular);
-           cliente.setId(id);
-           
-        try {
-           
-          ClienteDAO.alterarCliente(cliente);
+        String celular = request.getParameter("celular");                    
+
+        Funcionario f = new Funcionario(nome, cargo,endereco, bairro, cidade, estado,cep, sexo,telefone,celular );                        
+        f.setId(id);
+        try {           
+           FuncionarioDAO.alterar(f);
         } catch (Exception e) {
         }
         request.setAttribute("id", id);
-        request.setAttribute("cliente", cliente);              
+        request.setAttribute("func", f);              
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Cliente/alterarCliente.jsp");
-        dispatcher.forward(request, response);   
-    
-  }
+                = request.getRequestDispatcher("WEB-INF/Funcionario/pesquisaFuncionario.jsp");
+        dispatcher.forward(request, response);
+
+    }
 }

@@ -11,6 +11,16 @@ public class Usuario {
     public Usuario() {
     }
     //Construtor
+
+    public Usuario(String nome) {
+        this.nome = nome;
+    }
+    
+    public Usuario(String login, String senha) {
+        this.login = login;
+        this.senha = senha;
+    }
+    
     public Usuario(String login, String nome, String senha, String ativo) {
         this.login = login;
         this.nome = nome;

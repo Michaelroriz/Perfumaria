@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria.pi3.dao.servlet.cliente;
+package br.senac.sp.perfumaria_pi3.servlet.funcionario;
 
-import br.senac.sp.perfumaria.pi3.dao.ClienteDAO;
-import br.senac.sp.perfumaria.pi3.model.Cliente;
+import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -14,42 +13,42 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
- * @author Bruno
+ * @author Michael
  */
-@WebServlet(name = "ConsultarCliente", urlPatterns = {"/ConsultarCliente"})
-public class ConsultarCliente extends HttpServlet{
-   
+@WebServlet(name = "ExcluirFuncionario", urlPatterns = {"/ExcluirFuncionario"})
+public class ExcluirFuncionario extends HttpServlet {
+
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Cliente/pesquisarCliente.jsp");
+        //Variavel do id
+
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Funcionario/exibirFuncionario.jsp");
         dispatcher.forward(request, response);
+
     }
-    
-        @Override
+
+    @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
-        //Variavel do id
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        Cliente cliente= null;
-        try {
-            cliente = ClienteDAO.pesquisar(id);
+        String codigo = request.getParameter("id");
+        long id = Long.parseLong(codigo);
+        //Conexão para abertura e fechamento
+        try 
+        {
+           FuncionarioDAO.remove(id);
         } catch (Exception e) {
         }
-        request.setAttribute("cliente", cliente);
         
-        //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Cliente/resultadoConsulta.jsp").forward(request, response); 
-
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Funcionario/pesquisaFuncionario.jsp");
+        dispatcher.forward(request, response);
     }
 }
-    

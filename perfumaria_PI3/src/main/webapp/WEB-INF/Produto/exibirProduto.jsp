@@ -24,6 +24,7 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/functionsProduto.js" type="text/javascript"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -67,12 +68,11 @@
                                 </div>
                                 <br>
                                 <div>
-                                    <button type="submit" value="${prod.id}" name="id">Excluir</button>
+                                    <button type="submit" value="${prod.id}" name="id" onClick="confirmationDelete()">Excluir</button>
+                            </form>
 
-                            </form>
-                            <form method="get" action="${pageContext.request.contextPath}/ConsultaProduto">
-                                <button type="button" onclick="window.location.href = 'menu.jsp';">Voltar</button>
-                            </form>
+                            <button type="button" onClick="voltar()">Voltar</button>
+
                             <form method="get" action="${pageContext.request.contextPath}/AlterarProduto">
                                 <button type="submit" value="${prod.id}" name="id">Alterar</button>
                             </form>

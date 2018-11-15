@@ -1,4 +1,4 @@
-    package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.produto;
 
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import br.senac.sp.perfumaria.pi3.model.Produto;
@@ -9,41 +9,46 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
+
 /**
  *
  * @author Bruno
  */
 @WebServlet(name = "ConsultaProduto", urlPatterns = {"/ConsultaProduto"})
-    public class ConsultaProduto extends HttpServlet {
-    
-      @Override
+public class ConsultaProduto extends HttpServlet {
+
+    @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Produto/pesquisaProduto.jsp");
         dispatcher.forward(request, response);
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
+
         //Variavel do id
         long id = Long.parseLong(request.getParameter("id"));
-        
+
         Produto produto = null;
         try {
-            produto = ProdutoDAO.obter(id);
+            if (ProdutoDAO.obter(id) != null) {
+                produto = ProdutoDAO.obter(id);
+                request.setAttribute("prod", produto);
+                //Request diretorio
+                request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp").forward(request, response);
+            }else{
+                //Request diretorio
+                request.getRequestDispatcher("WEB-INF/Produto/pesquisaProduto.jsp").forward(request, response);
+            }
+
         } catch (Exception e) {
         }
-        request.setAttribute("prod", produto);
-        
-        //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp").forward(request, response); 
 
     }
-    
+
 }

@@ -3,19 +3,16 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.produto;
 
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import java.io.IOException;
-import java.sql.Connection;
-import java.sql.SQLException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -52,7 +49,7 @@ public class ExcluirProduto extends HttpServlet {
         }
         
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Produto/exibirProduto.jsp");
+                = request.getRequestDispatcher("WEB-INF/Produto/pesquisaProduto.jsp");
         dispatcher.forward(request, response);
     }
 

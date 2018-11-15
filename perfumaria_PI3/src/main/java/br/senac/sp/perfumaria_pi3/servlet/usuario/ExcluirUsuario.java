@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.usuario;
 
 import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
 import java.io.IOException;

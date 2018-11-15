@@ -3,54 +3,38 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.funcionario;
 
 import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
 import br.senac.sp.perfumaria.pi3.model.Funcionario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
-
 /**
  *
  * @author Michael
  */
-@WebServlet(name = "AlterarFuncionario", urlPatterns = {"/AlterarFuncionario"})
-public class AlterarFuncionario extends HttpServlet {
+@WebServlet(name = "IncluirFuncionario", urlPatterns = {"/IncluirFuncionario"})
+public class IncluirFuncionario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        Funcionario funcionario = null;
-        try {
-            funcionario = FuncionarioDAO.obter(id);
-            
-        } catch (Exception e) {
-             e.printStackTrace();
-        }
-        request.setAttribute("id", id);
-        request.setAttribute("func", funcionario);
-        //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Funcionario/alterarFuncionario.jsp")
-                .forward(request, response);            
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Funcionario/cadastrarFuncionario.jsp");
+        dispatcher.forward(request, response);
     }
 
-     @Override
-    protected void doPost(HttpServletRequest request,
+@Override
+        protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        long id = Long.parseLong(request.getParameter("codFunc"));
+
         String nome = request.getParameter("nome");
         String cargo = request.getParameter("cargo");
         String endereco = request.getParameter("endereco");
@@ -62,18 +46,21 @@ public class AlterarFuncionario extends HttpServlet {
         String telefone = request.getParameter("telefone");
         String celular = request.getParameter("celular");                    
 
-        Funcionario f = new Funcionario(nome, cargo,endereco, bairro, cidade, estado,cep, sexo,telefone,celular );                        
-        f.setId(id);
-        try {
-           
-           FuncionarioDAO.alterar(f);
+        Funcionario f = new Funcionario(nome, cargo,endereco, bairro, cidade, estado,cep, sexo,telefone,celular );                
+        
+        try {                       
+           FuncionarioDAO.inserir(f);
         } catch (Exception e) {
+            
         }
-        request.setAttribute("id", id);
-        request.setAttribute("func", f);              
+        
+        request.setAttribute("func", f);                
+        
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher("WEB-INF/Funcionario/alterarFuncionario.jsp");
+                = request.getRequestDispatcher(
+                        "menu.jsp");
+        
         dispatcher.forward(request, response);
-
+        
     }
 }

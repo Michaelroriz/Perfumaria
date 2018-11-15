@@ -1,5 +1,5 @@
 
-package br.senac.sp.perfumaria.pi3.dao.servlet.cliente;
+package br.senac.sp.perfumaria.pi3.servlet.cliente;
 
 import br.senac.sp.perfumaria.pi3.dao.ClienteDAO;
 import br.senac.sp.perfumaria.pi3.model.Cliente;
@@ -55,7 +55,7 @@ public class CadastrarCliente extends HttpServlet {
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher(
-                        "WEB-INF/Cliente/cadastrarCliente.jsp");
+                        "menu.jsp");
         dispatcher.forward(request, response);
    }
 }

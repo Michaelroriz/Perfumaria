@@ -3,10 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria.pi3.servlet.cliente;
 
-import br.senac.sp.perfumaria.pi3.dao.FuncionarioDAO;
-import br.senac.sp.perfumaria.pi3.model.Funcionario;
+import br.senac.sp.perfumaria.pi3.dao.ClienteDAO;
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -18,37 +17,37 @@ import javax.swing.JOptionPane;
 
 /**
  *
- * @author Michael
+ * @author Bruno
  */
-@WebServlet(name = "ConsultaFuncionario", urlPatterns = {"/ConsultaFuncionario"})
-public class ConsultaFuncionario extends HttpServlet {
+@WebServlet(name = "ExcluirCliente", urlPatterns = {"/ExcluirCliente"})
+public class ExcluirCliente extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Funcionario/pesquisaFuncionario.jsp");
+
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Cliente/resultadoConsulta.jsp");
         dispatcher.forward(request, response);
+
     }
-    
+
     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-        
-        //Variavel do id
-        long id = Long.parseLong(request.getParameter("id"));
-        
-        Funcionario funcionario = null;
+
+        String codigo = request.getParameter("id");
+        long id = Long.parseLong(codigo);
+        //Conexão para abertura e fechamento
         try {
-            funcionario = FuncionarioDAO.obter(id);
+            ClienteDAO.excluirCliente(id);
         } catch (Exception e) {
         }
-        request.setAttribute("func", funcionario);
-        
-        //Request diretorio
-        request.getRequestDispatcher("WEB-INF/Funcionario/exibirFuncionario.jsp").forward(request, response); 
 
+        RequestDispatcher dispatcher
+                = request.getRequestDispatcher("WEB-INF/Cliente/pesquisarCliente.jsp");
+        dispatcher.forward(request, response);
     }
 }

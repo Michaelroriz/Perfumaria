@@ -20,6 +20,7 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/functionsCliente.js" type="text/javascript"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -43,7 +44,7 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                     <div class="col-sm-5">
-                                        <input style="width: 300px;" required="required" type="text" name="nome" />
+                                        <input style="width: 300px;" id="nome" required="required" type="text" name="nome" />
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="sexo">Sexo</label>
 
@@ -55,24 +56,24 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="endereco">Endereço</label>
                                     <div class="col-sm-5">
-                                        <input style="width: 300px;" required="required" type="text" name="endereco" />
+                                        <input style="width: 300px;" id="endereco" required="required" type="text" name="endereco" />
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="bairro">Bairro</label>
                                     <div >
-                                        <input required="required" type="text" name="bairro" />
+                                        <input required="required" type="text" id="bairro" name="bairro" />
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="cidade">Cidade</label>
                                     <div class="col-sm-5">
-                                        <input style="width: 300px;" required="required" type="text" name="cidade" />
+                                        <input style="width: 300px;" id="cidade" required="required" type="text" name="cidade" />
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="estado">Estado</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
                                                     return false;
                                                 else
-                                                    return true;" maxlength="2" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
+                                                    return true;" maxlength="2" id="estado" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
                                     </div>
                                 </div>
 
@@ -82,7 +83,7 @@
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
                                                     return true;
                                                 else
-                                                    return false;" maxlength="9" placeholder="000-00000" required="required" type="text" name="cep"/>
+                                                    return false;" maxlength="9" id="cep" placeholder="000-00000" required="required" type="text" name="cep"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
@@ -90,16 +91,16 @@
                                     <div class="col-sm-5">
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
                                                     return true; else
-                                                    return false;" maxlength="14" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
+                                                    return false;" maxlength="14" id="telefone" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="celular">Celular</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
                                                     return true; else
-                                                    return false;" maxlength="14" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
+                                                    return false;" maxlength="14" id="celular" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
                                     </div>
                                 </div>                            
-                                <button type="submit">Salvar</button>
+                                <button type="submit" onClick="confirmation()">Salvar</button>
                                 <button type="reset">Limpar</button>
                                 <button type="reset" onclick="window.location.href = 'menu.jsp';">Voltar</button>
                             </form>

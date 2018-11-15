@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.produto;
 
 import java.io.IOException;
 import javax.servlet.RequestDispatcher;
@@ -17,7 +17,6 @@ import br.senac.sp.perfumaria.pi3.model.Categoria;
 import br.senac.sp.perfumaria.pi3.dao.ProdutoDAO;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -81,7 +80,7 @@ public class IncluirProduto extends HttpServlet {
         
         RequestDispatcher dispatcher
                 = request.getRequestDispatcher(
-                        "WEB-INF/Produto/cadastrarProduto.jsp");
+                        "menu.jsp");
         dispatcher.forward(request, response);
         
     }

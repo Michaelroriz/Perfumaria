@@ -3,15 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package br.senac.sp.perfumaria_pi3.servlet;
+package br.senac.sp.perfumaria_pi3.servlet.usuario;
 
 import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
-import br.senac.sp.perfumaria.pi3.model.Funcionario;
 import br.senac.sp.perfumaria.pi3.model.Usuario;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,55 +21,51 @@ import javax.swing.JOptionPane;
  *
  * @author Michael
  */
-@WebServlet(name = "IncluirUsuario", urlPatterns = {"/IncluirUsuario"})
-public class IncluirUsuario extends HttpServlet {
+@WebServlet(name = "AlterarUsuario", urlPatterns = {"/AlterarUsuario"})
+public class AlterarUsuario extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
         
-       
-                // Carregar aqui os departamentos
-        List<Funcionario> funcionario = new ArrayList<Funcionario>();
-
+        long id = Long.parseLong(request.getParameter("id"));
+        
+        Usuario usuario = null;
         try {
-           funcionario = UsuarioDAO.obterFuncionario();
+            usuario = UsuarioDAO.obter(id);
+            
         } catch (Exception e) {
              e.printStackTrace();
         }
-          
-        request.setAttribute("funcionario", funcionario);
-        RequestDispatcher dispatcher = request.getRequestDispatcher("WEB-INF/Usuario/cadastrarUsuario.jsp");
-        dispatcher.forward(request, response);
+        request.setAttribute("id", id);
+        request.setAttribute("usuario", usuario);
+        //Request diretorio
+        request.getRequestDispatcher("WEB-INF/Usuario/alterarUsuario.jsp")
+                .forward(request, response);            
     }
 
-    @Override
+     @Override
     protected void doPost(HttpServletRequest request,
             HttpServletResponse response)
             throws ServletException, IOException {
-
-        String nome = request.getParameter("func");
+        
+        long id = Long.parseLong(request.getParameter("codUsu"));
+        String nome = request.getParameter("nome");
         String login = request.getParameter("login");
         String senha = request.getParameter("senha");
         String ativo = "S";
 
-        Usuario u = new Usuario(login, nome, senha, ativo);
-        // Carregar aqui os departamentos
-        List<Funcionario> funcionario = new ArrayList<Funcionario>();
-        
-        try {
-//            funcionario = UsuarioDAO.obterFuncionario();
-            UsuarioDAO.inserir(u);
+        Usuario u = new Usuario(nome, login,senha, ativo);                        
+        u.setId(id);
+        try {           
+           UsuarioDAO.alterar(u);
         } catch (Exception e) {
         }
-
-        request.setAttribute("usuario", u);
-//        request.setAttribute("func", funcionario);
-
+        request.setAttribute("id", id);
+        request.setAttribute("func", u);              
         RequestDispatcher dispatcher
-                = request.getRequestDispatcher(
-                        "WEB-INF/Usuario/cadastrarUsuario.jsp");
+                = request.getRequestDispatcher("WEB-INF/Usuario/alterarUsuario.jsp");
         dispatcher.forward(request, response);
 
     }

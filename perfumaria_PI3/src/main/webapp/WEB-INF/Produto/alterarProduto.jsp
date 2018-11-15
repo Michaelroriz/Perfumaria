@@ -15,6 +15,7 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+        <script src="js/functionsProduto.js" type="text/javascript"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -39,11 +40,11 @@
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="nome">Nome</label>
                                     <div class="col-sm-5"> 
-                                        <input style="width: 250px;" required="required" type="text" value="${prod.nome}" name="nome" id="nome" />
+                                        <input style="width: 250px;" id="nome" required="required" type="text" value="${prod.nome}" name="nome" id="nome" />
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="marca">Marca</label>
                                     <div >
-                                        <input style="width: 250px;" required="required" type="text" value="${prod.marca}" name="marca" id="marca" />
+                                        <input style="width: 250px;" id="marca" required="required" type="text" value="${prod.marca}" name="marca" id="marca" />
                                     </div> 
                                 </div>
                                 <div class="form-group row">
@@ -61,30 +62,31 @@
                             <label class="col-sm-2 col-form-label" for="qtd">Quantidade</label>
                             <div class="col-sm-10">
                                 <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                    return true; else return false;" style="width: 250px;" required="required" type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
+                                            return true;
+                                        else
+                                            return false;" style="width: 250px;" id="qtd" required="required" type="text" value="${prod.quantidade}" name="qtd" id="qtde" />
                             </div>
                         </div>
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="prcompra">Preço compra</label>
                             <div class="col-sm-5">
-                                <input placeholder="0.00" style="width: 250px;" required="required" type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
+                                <input placeholder="0.00" style="width: 250px;" id="prcompra" required="required" type="text" value="${prod.precoCompra}" name="prcompra" id="prcompra"/>
                             </div>
                             <label class="col-sm-2 col-form-label" for="prvenda">Preço venda</label>
                             <div >
-                                <input placeholder="0.00" style="width: 250px;" required="required" type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
+                                <input placeholder="0.00" style="width: 250px;" id="prvenda" required="required" type="text" value="${prod.precoVenda}" name="prvenda" id="prvenda"/>
                             </div>
                         </div>
 
                         <div class="form-group row">
                             <label class="col-sm-2 col-form-label" for="descricao">Descrição</label>
                             <div class="col-sm-10">
-                                <textarea required="required" style="width: 900px;" style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
+                                <textarea required="required" style="width: 900px;" id="descricao" style="width: 50%;"  name="descricao">${prod.descricao}</textarea>
                             </div>
                         </div>
-                        <button type="submit">Salvar</button>
+                        <button type="submit" onClick="confirmationUpdate()">Salvar</button>
                         <button type="reset">Limpar</button>
-                        <button type="reset" onClick="history.go(-1)">Voltar</button>
-
+                        <button type="reset" onClick="voltar()">Voltar</button>
                     </div>
                     </form>
                 </div>
