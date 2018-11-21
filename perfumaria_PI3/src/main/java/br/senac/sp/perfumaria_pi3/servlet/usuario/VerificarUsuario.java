@@ -17,12 +17,14 @@ public class VerificarUsuario extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        request.getRequestDispatcher("index.html").forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher("index.html");
+			dispatcher.forward(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        HttpSession session = request.getSession();
         String login = request.getParameter("username");
         String senha = request.getParameter("userPass");
         Usuario u = new Usuario();
@@ -30,21 +32,16 @@ public class VerificarUsuario extends HttpServlet {
         try {
             u = UsuarioDAO.verificar(login, senha);
             user = u.getLogin();
-            if (user.equals(login)) {
-                
-//                RequestDispatcher dispatcher
-//                = request.getRequestDispatcher("menu.jsp");
-//        dispatcher.forward(request, response);
-                request.getRequestDispatcher("menu.jsp").forward(request, response);
-
-            } else {                
-//                RequestDispatcher dispatcher
-//                        = request.getRequestDispatcher("index.html");
-//                dispatcher.forward(request, response);
-                request.getRequestDispatcher("index.html").forward(request, response);
+            if(user==null || login==null){
+                response.sendRedirect("index.html");
             }
+            else if (user.equals(login)) {
+                session.setAttribute("usuario", u.getNome());
+			response.sendRedirect("menu.jsp");                
+            }       
         } catch (Exception e) {
             e.printStackTrace();
         }
+        
     }
 }

@@ -337,7 +337,7 @@ public class UsuarioDAO {
                     return usuario;
                 } 
             }
-            return null;
+            return usuario;
         } finally {
             //Se o result ainda estiver aberto, realiza seu fechamento
             if (rs != null && !rs.isClosed()) {

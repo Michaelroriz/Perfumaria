@@ -12,7 +12,7 @@
         <link rel="stylesheet"
               href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
         <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
-        <script src="js/functionsProduto.js" type="text/javascript"></script>
+        <script src="js/functionsUsuario.js" type="text/javascript"></script>
         <script
             src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
             integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
@@ -36,14 +36,14 @@
                     <div style="text-align: center;">
                         &nbsp;</div>
                 </div>
-                <form method="post" id="loginform" name="loginform" action="/perfumaria_PI3/VerificarUsuario">
+                <form method="post" id="loginform" name="loginform" action="VerificarUsuario">
 
                     <p style="text-align: center;">
                         Login:&nbsp;<input class="form-input" id="username" name="username" placeholder="Usuário" type="text" /></p>
                     <p style="text-align: center;">
-                        Senha:&nbsp;<input class="form-input" id="userPass" name="userPass" placeholder="Senha" type="text" /></p>
+                        Senha:&nbsp;<input class="form-input" id="userPass" name="userPass" placeholder="Senha" type="password" /></p>
                     <p style="text-align: center;">
-                        <button type="submit" class="login-form-btn" id="login" >Entrar</button>
+                        <button type="submit" onClick="enviardados()" class="login-form-btn" id="login" >Entrar</button>
                         
                 </form>
             </div>
