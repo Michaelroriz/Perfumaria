@@ -70,70 +70,126 @@ public class UsuarioDAO {
                 connection.close();
             }
         }
-//        connection = null;
-//        preparedStatement = null;
-//        ResultSet result = null;
-//        try {
-//            String sqlid = "select max(id) as id from USUARIOS";
-//            //Abre uma conexão com o banco de dados
-//            connection = obterConexao();
-//            //Cria um statement para execução de instruções SQL
-//            preparedStatement = connection.prepareStatement(sqlid);
-//
-//            result = preparedStatement.executeQuery();
-//
-//            if (result.next()) {
-//                long id = result.getLong("id");
-//                inserirFuncionarioUsuario(usuario.getId(), id);
-//            }
-//
-//        } finally {
-//            //Se o statement ainda estiver aberto, realiza seu fechamento
-//            if (preparedStatement != null && !preparedStatement.isClosed()) {
-//                preparedStatement.close();
-//            }
-//            //Se a conexão ainda estiver aberta, realiza seu fechamento
-//            if (connection != null && !connection.isClosed()) {
-//                connection.close();
-//            }
-//        }
+        connection = null;
+        preparedStatement = null;
+        ResultSet result = null;
+        try {
+            String sqlid = "select max(id) as id from USUARIOS";
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sqlid);
+
+            result = preparedStatement.executeQuery();
+
+            if (result.next()) {
+                long id = result.getLong("id");
+                Funcionario f = obterFunc(usuario.getNome());
+                inserirFuncionarioUsuario(f.getId(), id);
+            }
+
+        } finally {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
 
     }
+    public static Funcionario obterFunc(String nome)
+            throws SQLException, Exception {
+        //Compõe uma String de consulta que considera apenas o funcionario
+        //com o ID informado e que esteja ativo ("habilitado" com "true")
+        String sql = "SELECT * FROM funcionario WHERE nome=?";
 
-//    private static void inserirFuncionarioUsuario(long idf, long id)
-//            throws SQLException, Exception {
-//        String sql = "INSERT INTO FUNCIONARIO_USUARIOS (ID_FUNCIONARIO, ID_USUARIOS) "
-//                + "VALUES (?, ?)";
-//
-//        //Conexão para abertura e fechamento
-//        Connection connection = null;
-//        //Statement para obtenção através da conexão, execução de
-//        //comandos SQL e fechamentos
-//        PreparedStatement preparedStatement = null;
-//
-//        try {
-//            //Abre uma conexão com o banco de dados
-//            connection = obterConexao();
-//            //Cria um statement para execução de instruções SQL
-//            preparedStatement = connection.prepareStatement(sql);
-//            //Configura os parâmetros do "PreparedStatement"
-//            //preparedStatement.setDate(1, usuario.getDatahora());
-//            preparedStatement.setLong(1, id);
-//            preparedStatement.setLong(2, idf);
-//
-//            //Executa o comando no banco de dados
-//            preparedStatement.execute();
-//        } finally {
-//            //Se o statement ainda estiver aberto, realiza seu fechamento
-//            if (preparedStatement != null && !preparedStatement.isClosed()) {
-//                preparedStatement.close();
-//            }
-//            //Se a conexão ainda estiver aberta, realiza seu fechamento
-//            if (connection != null && !connection.isClosed()) {
-//                connection.close();
-//            }
-//        }
-//    }
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        //Armazenará os resultados do banco de dados
+        ResultSet result = null;
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            //Configura os parâmetros do "PreparedStatement"
+            preparedStatement.setString(1, nome);
+
+            //Executa a consulta SQL no banco de dados
+            result = preparedStatement.executeQuery();
+
+            //Verifica se há pelo menos um resultado
+            if (result.next()) {
+                //Cria uma instância de Produto e popula com os valores do BD
+
+                Funcionario f = new Funcionario();                
+                f.setId(result.getLong("ID"));
+                
+                
+                //Retorna o resultado
+                return f;
+            }
+        } finally {
+            //Se o result ainda estiver aberto, realiza seu fechamento
+            if (result != null && !result.isClosed()) {
+                result.close();
+            }
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+
+        //Se chegamos aqui, o "return" anterior não foi executado porque
+        //a pesquisa não teve resultados
+        //Neste caso, não há um elemento a retornar, então retornamos "null"
+        return null;
+    }
+
+    private static void inserirFuncionarioUsuario(long idf, long id)
+            throws SQLException, Exception {
+        String sql = "INSERT INTO FUNCIONARIO_USUARIOS (ID_FUNCIONARIO, ID_USUARIOS) "
+                + "VALUES (?, ?)";
+
+        //Conexão para abertura e fechamento
+        Connection connection = null;
+        //Statement para obtenção através da conexão, execução de
+        //comandos SQL e fechamentos
+        PreparedStatement preparedStatement = null;
+        
+        try {
+            //Abre uma conexão com o banco de dados
+            connection = obterConexao();
+            //Cria um statement para execução de instruções SQL
+            preparedStatement = connection.prepareStatement(sql);
+            //Configura os parâmetros do "PreparedStatement"
+            //preparedStatement.setDate(1, usuario.getDatahora());
+            preparedStatement.setLong(1, idf);
+            preparedStatement.setLong(2, id);
+
+            //Executa o comando no banco de dados
+            preparedStatement.execute();
+        } finally {
+            //Se o statement ainda estiver aberto, realiza seu fechamento
+            if (preparedStatement != null && !preparedStatement.isClosed()) {
+                preparedStatement.close();
+            }
+            //Se a conexão ainda estiver aberta, realiza seu fechamento
+            if (connection != null && !connection.isClosed()) {
+                connection.close();
+            }
+        }
+    }
     //Alterar
     public static void alterar(Usuario usuario) throws SQLException, Exception {
 //Conexão para abertura e fechamento
