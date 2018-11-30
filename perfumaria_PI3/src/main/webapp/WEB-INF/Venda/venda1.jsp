@@ -58,7 +58,7 @@
                                             <td align=middle width=100>Preço Venda</td>
                                             <td align=middle width=100>Quantidade(Stk)</td>
                                             <td align=middle width=100>Quantidade</td>
-                                            <td align=middle width=100>Selecionar</td> 
+                                            <td align=middle width=100></td> 
                                         </tr>
                                         <c:forEach items="${prod}" var="prod">
                                             <tr>
@@ -70,7 +70,7 @@
                                                 <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
                                                 <td align=middle><c:out value="${prod.quantidade}" /></td>    
                                                 <td align=middle> <input style="width: 100px;" type="number" name="quant" max="${prod.quantidade}" min="0"/></td> 
-                                                <td align=middle> <button type="button" name="add" id="add"/>Adicionar ao carrinho </td>
+                                                <td align=middle> <button type="button" name="add" id="${prod.id}"/>Adicionar ao carrinho </td>
                                             </tr>
                                         </c:forEach>
                                     </table>
