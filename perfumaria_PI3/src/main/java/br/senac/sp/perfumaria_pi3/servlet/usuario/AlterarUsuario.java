@@ -8,14 +8,12 @@ package br.senac.sp.perfumaria_pi3.servlet.usuario;
 import br.senac.sp.perfumaria.pi3.dao.UsuarioDAO;
 import br.senac.sp.perfumaria.pi3.model.Usuario;
 import java.io.IOException;
-import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.swing.JOptionPane;
 
 /**
  *

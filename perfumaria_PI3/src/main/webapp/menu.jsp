@@ -28,6 +28,7 @@
                         <li><a href="./ConsultaUsuario">Usuário</a></li>
                     </ul>
                 </li>
+                <li><a href="./Venda">Venda</a></li>
                 <li><a href="#">Relatorios</a>
                     <ul>
                         <li><a href="#">Relatorio1</a></li>

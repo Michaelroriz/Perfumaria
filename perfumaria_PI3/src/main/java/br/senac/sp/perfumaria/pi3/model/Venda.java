@@ -15,12 +15,24 @@ public class Venda {
     private int id;
     private int quantidade;
     private Date dt_venda;
+    private String[] produtos;
 
-    public Venda(int quantidade, Date dt_venda) {
+
+
+    public Venda(int quantidade, String[] produtos) {
         this.quantidade = quantidade;
-        this.dt_venda = dt_venda;
+        this.produtos = produtos;
+    }
+    
+    
+    public String[] getProdutos() {
+        return produtos;
     }
 
+    public void setProdutos(String[] produtos) {
+        this.produtos = produtos;
+    }
+    
     public int getId() {
         return id;
     }
