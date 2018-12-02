@@ -40,7 +40,7 @@
                             <form method="post" action="${pageContext.request.contextPath}/Venda">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
-                                    <select style="width: 300px;" name="cliente">                                          
+                                    <select style="width: 300px;" name="cliente" >                                          
                                         <c:forEach items="${cliente}" var="cliente">
                                             <option  type="search" value="${cliente.nome}" id="${cliente.id}" name="cliente"/>${cliente.id} | ${cliente.nome}
                                         </c:forEach>
@@ -48,34 +48,40 @@
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="prod">Produto</label>
-                                    <table border= 1>
-                                        <tr>
-                                            <td align=middle width=100>Id</td>
-                                            <td align=middle width=100>Nome</td>
-                                            <td align=middle width=100>Marca</td>
-                                            <td align=middle width=100>Descrição</td>
-                                            <td align=middle width=120>Preço Compra</td>
-                                            <td align=middle width=100>Preço Venda</td>
-                                            <td align=middle width=100>Quantidade(Stk)</td>
-                                            <td align=middle width=100>Quantidade</td>
-                                            <td align=middle width=100></td> 
-                                        </tr>
-                                        <c:forEach items="${prod}" var="prod">
+                                    <div class="table-wrapper">
+                                        <table border= 1>
                                             <tr>
-                                                <td align=middle><c:out value="${prod.id}"/></td>
-                                                <td align=middle><c:out value="${prod.nome}"/></td>
-                                                <td align=middle><c:out value="${prod.marca}" /></td>
-                                                <td align=middle><c:out value="${prod.descricao}" /></td>
-                                                <td align=middle><fmt:formatNumber value="${prod.precoCompra}" type="currency" /></td>
-                                                <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
-                                                <td align=middle><c:out value="${prod.quantidade}" /></td>    
-                                                <td align=middle> <input style="width: 100px;" type="number" name="quant" max="${prod.quantidade}" min="0"/></td> 
-                                                <td align=middle> <button type="button" name="add" id="${prod.id}"/>Adicionar ao carrinho </td>
+                                                <td align=middle width=100>Id</td>
+                                                <td align=middle width=100>Nome</td>
+                                                <td align=middle width=100>Marca</td>
+                                                <td align=middle width=100>Descrição</td>
+                                                <td align=middle width=120>Preço Compra</td>
+                                                <td align=middle width=100>Preço Venda</td>
+                                                <td align=middle width=100>Quantidade(Stk)</td>
+                                                <td align=middle width=100>Quantidade</td>
+                                                <td align=middle width=100></td> 
                                             </tr>
-                                        </c:forEach>
-                                    </table>
+                                            <c:forEach items="${prod}" var="prod">
+                                                <tr>
+                                                    <td align=middle><c:out value="${prod.id}"/></td>
+                                                    <td align=middle><c:out value="${prod.nome}"/></td>
+                                                    <td align=middle><c:out value="${prod.marca}" /></td>
+                                                    <td align=middle><c:out value="${prod.descricao}" /></td>
+                                                    <td align=middle><fmt:formatNumber value="${prod.precoCompra}" type="currency" /></td>
+                                                    <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
+                                                    <td align=middle><c:out value="${prod.quantidade}" /></td>    
+                                                    <td align=middle> <input style="width: 100px;" type="number" name="quant" max="${prod.quantidade}" min="0"/></td> 
+                                                    <td align=middle> <button type="button" class="btn btn-primary btn-md" id="${prod.id}" onchange="criarTabela(${prod.quantidade})"/> Adicionar ao carrinho</td>
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
+                                    </div>
                                 </div>
-
+                                <div id="carrinhodeCompras">
+                                    <label for="carrinho">Carrinho: </label>
+                                    <div id="tabela"></div>
+                                </div>
+                                <br>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="total">Total:</label>
                                     <input  type="text" name="total"/>

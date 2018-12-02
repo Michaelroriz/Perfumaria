@@ -1,9 +1,18 @@
 
-
 body{
     font-family: arial, helvetica, sans-serif;
     font-size: 14px;
     background-color:whitesmoke;
+}
+.table-wrapper {
+    max-height: 200px;
+    overflow-y: auto;
+}
+img{
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    align-items: center;
 }
 
 .centralizarLogin{
@@ -52,10 +61,23 @@ nav h2{
     position: relative;
     top:-20px;
 }
+
 .table{
     position: fixed;
     padding: 10px;
     margin:10px;
+}
+table {
+  border: 1px #c0c0c0 solid;
+  width: 100%;
+}
+table th {
+  background-color: #00f;
+  color: #fff;
+}
+table td {
+  background-color: #f0f0f0;
+  color: #0c0c0c;
 }
 .container {
     position: absolute;
