@@ -24,9 +24,10 @@ public class Funcionario {
     private String sexo;
     private String telefone;
     private String celular;
+    private Integer filial;
     private Date dataCadastro;
 
-    public Funcionario(String nome, String cargo, String endereco, String bairro, String cidade, String estado, String cep, String sexo, String telefone, String celular) {
+    public Funcionario(String nome, String cargo, String endereco, String bairro, String cidade, String estado, String cep, String sexo, String telefone, String celular, Integer filial) {
         this.nome = nome;
         this.cargo = cargo;
         this.endereco = endereco;
@@ -37,6 +38,7 @@ public class Funcionario {
         this.sexo = sexo;
         this.telefone = telefone;
         this.celular = celular;
+        this.filial = filial;
     }
 
     public Funcionario() {
@@ -131,6 +133,14 @@ public class Funcionario {
         this.cargo = cargo;
     }
 
+    public Integer getFilial() {
+        return filial;
+    }
+
+    public void setFilial(Integer filial) {
+        this.filial = filial;
+    }        
+    
     public Date getDataCadastro() {
         return dataCadastro;
     }

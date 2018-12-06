@@ -29,6 +29,8 @@ public class Produto {
     private String[] categorias;
     
     private Date dataCadastro;
+    
+    private int quantidadeCarrinho;
 
     public Produto() {
     }
@@ -114,5 +116,14 @@ public class Produto {
     public void setDataCadastro(Date dataCadastro) {
         this.dataCadastro = dataCadastro;
     }
+
+    public int getQuantidadeCarrinho() {
+        return quantidadeCarrinho;
+    }
+
+    public void setQuantidadeCarrinho(int quantidadeCarrinho) {
+        this.quantidadeCarrinho = quantidadeCarrinho;
+    }
+    
     
 }

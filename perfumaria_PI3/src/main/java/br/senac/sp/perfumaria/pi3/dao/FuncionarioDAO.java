@@ -40,8 +40,8 @@ public class FuncionarioDAO {
             throws SQLException, Exception {
         //Monta a string de inserção de um funcionario no BD,
         //utilizando os dados do funcionario passados como parâmetro
-        String sql = "INSERT INTO FUNCIONARIO (NOME, CARGO, ENDERECO, BAIRRO, CIDADE, ESTADO, CEP, SEXO, TELEFONE, CELULAR, CADASTRO, ATIVO) "
-                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(),?)";
+        String sql = "INSERT INTO FUNCIONARIO (NOME, CARGO, ENDERECO, BAIRRO, CIDADE, ESTADO, CEP, SEXO, TELEFONE, CELULAR, CADASTRO, FILIAL, ATIVO) "
+                + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, NOW(), ?, ?)";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -65,7 +65,8 @@ public class FuncionarioDAO {
             preparedStatement.setString(8, funcionario.getSexo());
             preparedStatement.setString(9, funcionario.getTelefone());
             preparedStatement.setString(10, funcionario.getCelular());
-            preparedStatement.setString(11, "S");
+            preparedStatement.setInt(11, funcionario.getFilial());
+            preparedStatement.setString(12, "S");
             //Executa o comando no banco de dados
             preparedStatement.execute();
         } finally {
@@ -121,6 +122,7 @@ public class FuncionarioDAO {
                 funcionario.setSexo(result.getString("SEXO"));
                 funcionario.setTelefone(result.getString("TELEFONE"));
                 funcionario.setCelular(result.getString("CELULAR"));
+                funcionario.setFilial(result.getInt("FILIAL"));
                 funcionario.setDataCadastro(result.getDate("CADASTRO"));
                 //Retorna o resultado
                 return funcionario;
@@ -189,7 +191,7 @@ public class FuncionarioDAO {
             connection = obterConexao();
             String sql = "UPDATE funcionario "
                 + " SET nome = ?, cargo = ?, endereco = ?, bairro = ?, cidade = ?,"
-                + " estado = ?, cep = ?, sexo = ?, telefone = ?, celular = ?"
+                + " estado = ?, cep = ?, sexo = ?, telefone = ?, celular = ?, filial = ?"
                 + " WHERE id = ?";
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
@@ -207,8 +209,9 @@ public class FuncionarioDAO {
             preparedStatement.setString(7, funcionario.getCep());
             preparedStatement.setString(8, funcionario.getSexo());
             preparedStatement.setString(9, funcionario.getTelefone());
-            preparedStatement.setString(10, funcionario.getCelular());                       
-            preparedStatement.setLong(11, funcionario.getId());                      
+            preparedStatement.setString(10, funcionario.getCelular()); 
+            preparedStatement.setInt(11, funcionario.getFilial());
+            preparedStatement.setLong(12, funcionario.getId());                      
             preparedStatement.executeUpdate();
             
         } finally {

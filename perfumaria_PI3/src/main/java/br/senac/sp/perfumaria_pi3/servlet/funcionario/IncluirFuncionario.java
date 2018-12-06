@@ -44,9 +44,11 @@ public class IncluirFuncionario extends HttpServlet {
         String cep = request.getParameter("cep");
         String sexo = request.getParameter("sexo");
         String telefone = request.getParameter("telefone");
-        String celular = request.getParameter("celular");                    
+        String celular = request.getParameter("celular");
+        String filialStr = request.getParameter("filial");
+        Integer filial = Integer.parseInt(filialStr);  
 
-        Funcionario f = new Funcionario(nome, cargo,endereco, bairro, cidade, estado,cep, sexo,telefone,celular );                
+        Funcionario f = new Funcionario(nome, cargo,endereco, bairro, cidade, estado,cep, sexo,telefone,celular,filial);                
         
         try {                       
            FuncionarioDAO.inserir(f);
