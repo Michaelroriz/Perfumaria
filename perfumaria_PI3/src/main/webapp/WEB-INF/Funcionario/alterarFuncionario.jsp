@@ -75,7 +75,9 @@
                                     <label class="col-sm-2 col-form-label" for="estado">Estado</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return false; else return true;" value="${func.estado}" maxlength="2" id="estado" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
+                                                    return false;
+                                                else
+                                                    return true;" value="${func.estado}" maxlength="2" id="estado" style="width: 50px;" placeholder="SP" required="required" type="text" name="estado" />
                                     </div>
                                 </div>
 
@@ -83,22 +85,36 @@
                                     <label class="col-sm-2 col-form-label" for="cep">Cep</label>
                                     <div class="col-sm-10">
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${func.cep}" maxlength="9" id="cep" placeholder="000-00000" required="required" type="text" name="cep"/>
+                                                    return true;
+                                                else
+                                                    return false;" value="${func.cep}" maxlength="9" id="cep" placeholder="000-00000" required="required" type="text" name="cep"/>
                                     </div>
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="telefone">Telefone</label>
                                     <div class="col-sm-5">
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${func.telefone}" maxlength="14" id="telefone" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
+                                                    return true; else
+                                                    return false;" value="${func.telefone}" maxlength="14" id="telefone" placeholder="(00)0000-0000" required="required" type="text" name="telefone"/>
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="celular">Celular</label>
                                     <div>
                                         <input onkeypress="if (!isNaN(String.fromCharCode(window.event.keyCode)))
-                                                    return true; else return false;" value="${func.celular}" maxlength="14" id="celular" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
+                                                    return true; else
+                                                    return false;" value="${func.celular}" maxlength="14" id="celular" placeholder="(00)00000-0000" required="required" type="text" name="celular"/>
                                     </div>
-                                </div> 
-                                    <button type="submit" onClick="confirmationUpdate()">Salvar</button>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="filial">Filial</label>                                
+                                    <select name="filial" >                                        
+                                        <option value="1">Morumbi (Av. Dr. Guilherme Dumont Villares, 1496)</option>
+                                        <option value="2">Osasco (Rua Paulo Lício Rizzo, 344)</option>                                        
+                                        <option value="3">Campinas (Rua Dr. Antônio da Costa Carvalho, 480)</option>                                        
+                                        <option value="4">Vila Mariana (Rua Me. Cabrini, 413)</option>
+                                        <option value="5">Jundiaí (Av. Henrique Andres, 770)</option>
+                                    </select> 
+                                </div>
+                                <button type="submit" onClick="confirmationUpdate()">Salvar</button>
                                 <button type="reset">Limpar</button>
                                 <button type="reset" onClick="voltar()">Voltar</button>
                             </form>

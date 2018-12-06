@@ -58,6 +58,7 @@
                                             <td align=middle width=10>Sexo</td>
                                             <td align=middle width=100>Telefone</td>
                                             <td align=middle width=100>Celular</td>
+                                            <td align=middle width=100>Filial</td>
                                             <td align=middle width=150>Data de Cadastro</td>
                                         </tr>
                                         <tr>
@@ -72,6 +73,7 @@
                                             <td align=middle><c:out value="${func.sexo}" /></td>
                                             <td align=middle><c:out value="${func.telefone}" /></td>
                                             <td align=middle><c:out value="${func.celular}" /></td>
+                                            <td align=middle><c:out value="${func.filial}" /></td>
                                             <td align=middle><fmt:formatDate value="${func.dataCadastro}"/></td>
                                         </tr>
                                     </table>
