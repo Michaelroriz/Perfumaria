@@ -47,27 +47,19 @@
                                     </select>                                    
                                 </div>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="prod">Produto</label>
-                                    <div class="table-wrapper">
-                                     <select style="width: 300px;" name="produto" >                                          
-                                        <c:forEach items="${prod}" var="prod">
-                                            <option  type="search" value="${prod.id}" id="${prod.id}" name="produto"/>${prod.nome}
-                                        </c:forEach>
-                                      </select>
-                                        
-                                    </div>
+                                    <label class="col-sm-2 col-form-label" for="prod">Produto</label>                                    
+                                        <select style="width: 300px;" name="produto" >                                          
+                                            <c:forEach items="${prod}" var="prod">
+                                                <option  type="search" value="${prod.id}" id="${prod.id}" name="produto"/>${prod.nome}
+                                            </c:forEach>
+                                        </select>                                    
                                 </div>
-                                <div id="carrinhodeCompras">
-                                    <label for="carrinho">Carrinho: </label>
-                                    <div id="tabela"></div>
-                                </div>
-                                <br>
                                 <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="total">Total:</label>
-                                    <input  type="text" name="total"/>
-                                </div>
+                                    <label class="col-sm-2 col-form-label" for="quant">Quantidade:</label>
+                                    <input  type="number" name="quant"/>
+                                </div>                               
 
-                                <button type="submit">Salvar</button>
+                                <button type="submit">Adicionar ao Carrinho</button>
                                 <button type="reset">Limpar</button>
                                 <button type="reset" onclick="window.location.href = 'menu.jsp';">Voltar</button>
                             </form>
