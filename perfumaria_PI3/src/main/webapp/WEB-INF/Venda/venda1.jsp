@@ -37,7 +37,7 @@
                 <div class="row">
                     <div class="col-12">                                        
                         <div>
-                            <form method="post" action="${pageContext.request.contextPath}/Venda">
+                            <form method="GET" action="${pageContext.request.contextPath}/Carrinho">
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
                                     <select style="width: 300px;" name="cliente" >                                          
@@ -63,6 +63,7 @@
                                             </tr>
                                             <c:forEach items="${prod}" var="prod">
                                                 <tr>
+                                                <input type="hidden" value="${prod.nome}" id="idProduto" name="idProduto">
                                                     <td align=middle><c:out value="${prod.id}"/></td>
                                                     <td align=middle><c:out value="${prod.nome}"/></td>
                                                     <td align=middle><c:out value="${prod.marca}" /></td>
