@@ -27,7 +27,7 @@ public class CarrinhoVenda extends HttpServlet {
             throws ServletException, IOException {
         
         String cliente = request.getParameter("cliente");
-        String idProduto = request.getParameter("IdProduto");
+        String idProduto = request.getParameter("produto");
         String qtdStr = request.getParameter("quant");
         int qtd = Integer.parseInt(qtdStr);
         
