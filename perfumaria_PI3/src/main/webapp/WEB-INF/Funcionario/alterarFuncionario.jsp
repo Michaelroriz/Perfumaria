@@ -45,7 +45,6 @@
                                         <input style="width: 300px;" id="nome" required="required" value="${func.nome}" type="text" name="nome" />
                                     </div>
                                     <label class="col-sm-2 col-form-label" for="sexo">Sexo</label>
-
                                     <select name="sexo" value="${func.sexo}">                                        
                                         <option value="M">Masculino</option>
                                         <option value="F">Feminino</option>                                        
@@ -114,6 +113,7 @@
                                         <option value="5">Jundiaí (Av. Henrique Andres, 770)</option>
                                     </select> 
                                 </div>
+                                    
                                 <button type="submit" onClick="confirmationUpdate()">Salvar</button>
                                 <button type="reset">Limpar</button>
                                 <button type="reset" onClick="voltar()">Voltar</button>

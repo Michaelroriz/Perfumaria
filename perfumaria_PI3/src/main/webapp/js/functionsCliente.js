@@ -101,13 +101,7 @@ function notifyMe() {
     }
 }
 function busca() {
-    document.location.href = "/ConsultarCliente";
-    var url = document.location.href = "/ConsultarCliente";
-    if (url.indexOf("Resultado..") > -1) {
-        alert("em teste (1)");
-    } else {
-        alert("em teste (2)");
-    }
+    
 }
 
 

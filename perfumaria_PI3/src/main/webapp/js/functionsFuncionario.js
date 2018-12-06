@@ -109,11 +109,5 @@ function notifyMe() {
     }
 }
 function busca() {
-    document.location.href = "/ConsultaFuncionario";
-    var url = document.location.href = "/ConsultaFuncionario";
-    if (url.indexOf("Resultado..") > -1) {
-        alert("em teste (1)");
-    } else {
-        alert("em teste (2)");
-    }
+    
 }
