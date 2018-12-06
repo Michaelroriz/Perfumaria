@@ -32,7 +32,7 @@
     </head>
     <body>
         <nav>            
-            <h2 style="color: white">Venda</h2>        
+            <h2 style="color: white">Realizar Venda</h2>        
             <main class="container">
                 <div class="row">
                     <div class="col-12">                                        
@@ -42,32 +42,44 @@
                                     <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
                                     <select style="width: 300px;" name="cliente" >                                          
                                         <c:forEach items="${cliente}" var="cliente">
-                                            <option  type="search" value="${cliente.nome}" id="${cliente.id}" name="cliente"/>${cliente.id} | ${cliente.nome}
+                                            <option  type="search" value="${cliente.id}" id="${cliente.id}" name="cliente"/>${cliente.id} - ${cliente.nome}
                                         </c:forEach>
                                     </select>                                    
                                 </div>
                                 <div class="form-group row">
                                     <label class="col-sm-2 col-form-label" for="prod">Produto</label>
-                                    <div class="table-wrapper">
-                                     <select style="width: 300px;" name="produto" >                                          
-                                        <c:forEach items="${prod}" var="prod">
-                                            <option  type="search" value="${prod.id}" id="${prod.id}" name="produto"/>${prod.nome}
-                                        </c:forEach>
-                                      </select>
-                                        
+                                     <div class="table-wrapper">
+                                        <table border= 1>
+                                            <tr>
+                                                <td align=middle width=100>Selecione</td>
+                                                <td align=middle width=100>Id</td>
+                                                <td align=middle width=100>Nome</td>
+                                                <td align=middle width=100>Marca</td>
+                                                <td align=middle width=100>Descrição</td>
+                                                <td align=middle width=120>Preço Compra</td>
+                                                <td align=middle width=100>Preço Venda</td>
+                                                <td align=middle width=100>Quantidade Disponível</td>
+                                                <td align=middle width=100>Quantidade</td>
+                                            </tr>
+                                            <c:forEach items="${prod}" var="prod">
+                                                <tr>
+                                                    <td align=middle><input type="checkbox" value="${prod.id}" id="${prod.id}" name="selProduto"></td>
+                                                    <td align=middle><c:out value="${prod.id}"/></td>
+                                                    <td align=middle><c:out value="${prod.nome}"/></td>
+                                                    <td align=middle><c:out value="${prod.marca}" /></td>
+                                                    <td align=middle><c:out value="${prod.descricao}" /></td>
+                                                    <td align=middle><fmt:formatNumber value="${prod.precoCompra}" type="currency" /></td>
+                                                    <td align=middle><fmt:formatNumber value="${prod.precoVenda}" type="currency" /></td>
+                                                    <td align=middle><c:out value="${prod.quantidade}" /></td>    
+                                                    <td align=middle> <input style="width: 100px;" type="number" name="quant" max="${prod.quantidade}" min="0"/></td> 
+                                                </tr>
+                                            </c:forEach>
+                                        </table>
                                     </div>
                                 </div>
-                                <div id="carrinhodeCompras">
-                                    <label for="carrinho">Carrinho: </label>
-                                    <div id="tabela"></div>
-                                </div>
                                 <br>
-                                <div class="form-group row">
-                                    <label class="col-sm-2 col-form-label" for="total">Total:</label>
-                                    <input  type="text" name="total"/>
-                                </div>
 
-                                <button type="submit">Salvar</button>
+                                <button type="submit">Avançar</button>
                                 <button type="reset">Limpar</button>
                                 <button type="reset" onclick="window.location.href = 'menu.jsp';">Voltar</button>
                             </form>

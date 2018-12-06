@@ -29,11 +29,11 @@ public class Venda extends HttpServlet {
             throws ServletException, IOException {
         
        
-                // Carregar aqui os departamentos
+        Long idCliente = 0L;
         List<Cliente> cliente = new ArrayList<Cliente>();
         List<Produto> produto = new ArrayList<Produto>();
         try {
-           cliente = VendaDAO.obterCliente();
+           cliente = VendaDAO.obterCliente(idCliente);
            produto = VendaDAO.obterProduto();
         } catch (Exception e) {
              e.printStackTrace();
@@ -50,17 +50,11 @@ public class Venda extends HttpServlet {
             HttpServletResponse response)
             throws ServletException, IOException {
 
-        String cliente = request.getParameter("cliente");
-        String prod [] = request.getParameterValues("prod");
-        String qtdStr = request.getParameter("quantidade");
-        int qtd = Integer.parseInt(qtdStr); 
 
-        //Venda v = new Venda(qtd, prod);
         
         
         
-        try {//           
-           // UsuarioDAO.inserir(u);
+        try {
         } catch (Exception e) {
         }
 

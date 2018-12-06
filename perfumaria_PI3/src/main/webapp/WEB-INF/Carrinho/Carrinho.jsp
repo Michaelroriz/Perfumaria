@@ -32,17 +32,44 @@
 
     </head>
     <body>
-        <table border= 1>
-            <tr>
-                <td align=middle width=100>Cliente</td>
-                <td align=middle width=100>Produto</td>
-                <td align=middle width=100>Quantidade</td>
-            </tr>
-            <tr>
-                <td align=middle><c:out value="${cliente}"/></td>
-                <td align=middle><c:out value="${produto}"/></td>
-                <td align=middle><c:out value="${quantidade}"/></td>
-            </tr>
-        </table>
+        <nav>            
+            <h2 style="color: white">Carrinho - Resumo</h2>        
+            <main class="container">
+                <div class="row">
+                    <div class="col-12">                                        
+                        <div>
+                            <form method="POST" action="${pageContext.request.contextPath}/Carrinho">
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label" for="cliente">Cliente</label>
+                                    <c:forEach items="${cliente}" var="cliente">
+                                        <input  type="text" value="${cliente.id} - ${cliente.nome}" id="${cliente.id}" name="cliente" disabled/>
+                                    </c:forEach>
+                                </div>
+                                <table border= 1>
+                                    <tr>
+                                        <td align=middle width=100>Produto</td>
+                                        <td align=middle width=100>Quantidade</td>
+                                    </tr>
+                                    <tr>
+                                        <c:forEach items="${produto}" var="prod">
+                                            <td align=middle><c:out value="${prod}"/></td>
+                                        </c:forEach>
+
+                                        <td align=middle><c:out value="${quantidade}"/></td>
+                                    </tr>
+                                </table>
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <br>
+                <br>
+                <br>
+                <button type="submit">Realizar Venda</button>
+            </main>
+        </nav>
+        <%@ include file="/rodape.jsp"%>    
     </body>
 </html>

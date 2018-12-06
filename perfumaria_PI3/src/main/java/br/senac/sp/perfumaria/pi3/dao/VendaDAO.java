@@ -41,10 +41,10 @@ public class VendaDAO {
 
         return conn;
     }
-    public static List<Cliente> obterCliente()
+    public static List<Cliente> obterCliente(Long id)
             throws SQLException, Exception {
         //Compõe uma String de consulta que considera apenas o usuario        
-        String sql = "SELECT * FROM cliente";
+            String sql = "SELECT * FROM cliente";
 
         //Conexão para abertura e fechamento
         Connection connection = null;
@@ -58,9 +58,22 @@ public class VendaDAO {
             connection = obterConexao();
             //Cria um statement para execução de instruções SQL
             preparedStatement = connection.prepareStatement(sql);
+            
+            if (id == 0)
+            {
+                result = preparedStatement.executeQuery();
+            }
+            else
+            {
+                sql += " WHERE ID =?";
+                preparedStatement = connection.prepareStatement(sql);
+                preparedStatement.setLong(1, id);
+                result = preparedStatement.executeQuery();
+            }
+            
 
             //Executa a consulta SQL no banco de dados
-            result = preparedStatement.executeQuery();
+            
             List<Cliente> clientes = new ArrayList<Cliente>();
 
             //Verifica se há pelo menos um resultado
